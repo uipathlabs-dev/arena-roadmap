@@ -199,7 +199,7 @@
             {
               "id": "rev-acc-hub",
               "name": "Account Hub",
-              "status": "prog",
+              "status": "plan",
               "desc": "Per-account drilldown: planning, activity, research, consumption.",
               "children": []
             }
@@ -263,35 +263,35 @@
         {
           "id": "ad-permissions",
           "name": "Permissions",
-          "status": "plan",
+          "status": "prog",
           "desc": "Access based on predefined teams; territory assignment.",
           "children": []
         },
         {
           "id": "ad-upload",
           "name": "Data Upload",
-          "status": "plan",
+          "status": "prog",
           "desc": "Quota upload with Excel import.",
           "children": []
         },
         {
           "id": "ad-snapshots",
           "name": "Snapshots",
-          "status": "plan",
+          "status": "prog",
           "desc": "Check or generate bridge data on demand.",
           "children": []
         },
         {
           "id": "ad-forecast-settings",
           "name": "Forecast Settings",
-          "status": "plan",
+          "status": "prog",
           "desc": "Set thresholds for regions and account buckets.",
           "children": []
         },
         {
           "id": "ad-general",
           "name": "General",
-          "status": "plan",
+          "status": "prog",
           "desc": "Generic variable data used across the app.",
           "children": []
         },
