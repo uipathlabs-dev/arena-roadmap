@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arena — Roadmap</title>
+<style>
+  :root {
+    --paper: #f2f4f6; --card: #ffffff; --ink: #1b2733; --muted: #5c6b78;
+    --line: #d9e0e6; --branch: #b9c4cd; --accent: #0f5b66; --accent-soft: #e3eef0;
+    --live: #1e7a46; --live-soft: #e4f2ea;
+    --prog: #2b5fd9; --prog-soft: #e7edfb;
+    --plan: #5c6b78; --plan-soft: #eceff2;
+    --backlog: #6b5ca8; --backlog-soft: #edeaf6;
+    --dropped: #b3261e; --dropped-soft: #f9e5e3;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+    --sans: "Avenir Next", "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.5; margin: 0; padding: 0 20px 80px; }
+  .wrap { max-width: 940px; margin: 0 auto; }
+
+  header.mast { padding: 40px 0 20px; border-bottom: 3px solid var(--ink); }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
+  h1 { font-size: clamp(30px, 5vw, 42px); font-weight: 700; letter-spacing: -.02em; margin: 0 0 12px; text-wrap: balance; }
+  .foundation { background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 12px 16px; font-size: 14px; max-width: 74ch; }
+  .foundation b { color: var(--accent); }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; padding: 12px 0; font-size: 12.5px; color: var(--muted); border-bottom: 1px solid var(--line); }
+  .lg { display: inline-flex; align-items: center; gap: 6px; }
+  .chip { display: inline-block; font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; padding: 2px 8px; border-radius: 2px; white-space: nowrap; }
+  .c-live { background: var(--live-soft); color: var(--live); }
+  .c-prog { background: var(--prog-soft); color: var(--prog); }
+  .c-plan { background: var(--plan-soft); color: var(--plan); }
+  .c-backlog { background: var(--backlog-soft); color: var(--backlog); }
+  .c-dropped { background: var(--dropped-soft); color: var(--dropped); }
+  .tag { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); border-radius: 2px; padding: 1px 7px; }
+
+  .toolbar { position: sticky; top: 0; z-index: 10; background: var(--paper); display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 0; margin-bottom: 24px; border-bottom: 1px solid var(--line); font-size: 13px; }
+  .toolbar .hint { color: var(--muted); flex: 1 1 240px; min-width: 200px; }
+  .toolbar button { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; border: 1px solid var(--ink); background: var(--card); color: var(--ink); padding: 7px 14px; border-radius: 2px; }
+  .toolbar button.primary { background: var(--ink); color: #fff; }
+  .toolbar button:disabled { opacity: .45; cursor: default; }
+  button:focus-visible, select:focus-visible, summary:focus-visible, textarea:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #saveState { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+  #saveState.err { color: var(--dropped); }
+
+  select.status { font-family: var(--mono); font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; font-weight: 600; border: 1px solid var(--line); border-radius: 3px; padding: 3px 6px; cursor: pointer; background: var(--card); }
+  select.status:disabled { cursor: default; opacity: .9; }
+  select.status.s-live { background: var(--live-soft); color: var(--live); border-color: var(--live); }
+  select.status.s-prog { background: var(--prog-soft); color: var(--prog); border-color: var(--prog); }
+  select.status.s-plan { background: var(--plan-soft); color: var(--plan); border-color: var(--plan); }
+  select.status.s-backlog { background: var(--backlog-soft); color: var(--backlog); border-color: var(--backlog); }
+  select.status.s-dropped { background: var(--dropped-soft); color: var(--dropped); border-color: var(--dropped); }
+
+  details.section-block { margin-bottom: 14px; }
+  details.section-block > summary { list-style: none; cursor: pointer; background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--accent); padding: 11px 16px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  details.section-block > summary::-webkit-details-marker { display: none; }
+  .chev { width: 0; height: 0; flex: 0 0 auto; border-left: 7px solid var(--accent); border-top: 5px solid transparent; border-bottom: 5px solid transparent; transition: transform .15s ease; }
+  details[open] > summary .chev { transform: rotate(90deg); }
+  @media (prefers-reduced-motion: reduce) { .chev { transition: none; } }
+  summary .st { font-size: 16.5px; font-weight: 700; letter-spacing: -.01em; }
+  summary .sp { font-size: 12.5px; color: var(--muted); flex: 1 1 100%; margin-left: 19px; }
+
+  .section-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; padding: 12px 0 4px 10px; }
+  .sf { background: var(--card); border: 1px dashed var(--line); padding: 9px 12px; }
+  .sf label { display: block; font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .sf textarea { width: 100%; border: none; background: transparent; font-family: var(--sans); font-size: 13px; color: var(--ink); resize: vertical; min-height: 40px; line-height: 1.45; }
+  .sf textarea::placeholder { color: var(--branch); }
+  .sf textarea:disabled { color: var(--muted); }
+
+  .tree, .tree ul { list-style: none; margin: 0; padding: 0; }
+  .tree { padding: 8px 0 4px 10px; }
+  .tree ul { padding-left: 26px; }
+  .tree li { position: relative; padding: 4px 0 4px 22px; }
+  .tree li::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; border-left: 2px solid var(--branch); }
+  .tree li::after { content: ""; position: absolute; left: 0; top: 24px; width: 16px; border-top: 2px solid var(--branch); }
+  .tree li:last-child::before { height: 24px; bottom: auto; }
+
+  .node { background: var(--card); border: 1px solid var(--line); padding: 9px 14px; display: block; }
+  .node .nh { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .node .nh b { font-size: 14.5px; }
+  .node .nh select.status { margin-left: auto; }
+  .node .purpose { font-size: 12.5px; color: var(--muted); margin-top: 1px; max-width: 70ch; }
+  .node.dirty { box-shadow: inset 3px 0 0 var(--accent); }
+  .sf.dirty { border-style: solid; border-color: var(--accent); }
+
+  dialog { border: 1px solid var(--ink); border-radius: 4px; padding: 22px; max-width: 460px; font-family: var(--sans); }
+  dialog::backdrop { background: rgba(27,39,51,.45); }
+  dialog h2 { margin: 0 0 8px; font-size: 17px; }
+  dialog p { font-size: 13px; color: var(--muted); margin: 0 0 12px; }
+  dialog input { width: 100%; padding: 8px 10px; font-family: var(--mono); font-size: 12px; border: 1px solid var(--line); border-radius: 3px; margin-bottom: 12px; }
+  dialog .row { display: flex; gap: 8px; justify-content: flex-end; }
+  dialog button { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; padding: 7px 14px; cursor: pointer; border: 1px solid var(--ink); background: var(--card); border-radius: 2px; }
+  dialog button.primary { background: var(--ink); color: #fff; }
+
+  footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <p class="eyebrow" id="subtitle"></p>
+    <h1 id="title">Loading…</h1>
+    <div class="foundation" id="foundation" hidden></div>
+  </header>
+
+  <div class="legend" id="legend"></div>
+
+  <div class="toolbar">
+    <span class="hint" id="hint">Read-only view. Click <b>Enable editing</b> and paste your GitHub token to make changes.</span>
+    <span id="saveState"></span>
+    <button id="editBtn" type="button">Enable editing</button>
+    <button id="saveBtn" class="primary" type="button" disabled>Save changes</button>
+    <button id="reloadBtn" type="button">Reload</button>
+  </div>
+
+  <main id="app"></main>
+
+  <footer id="foot"></footer>
+</div>
+
+<dialog id="tokenDialog">
+  <h2>Enable editing</h2>
+  <p>Paste a GitHub <b>fine-grained personal access token</b> with <b>Contents: Read &amp; Write</b> permission on this repository only. It is stored in your browser (localStorage) and sent only to api.github.com. See the README for a step-by-step.</p>
+  <input id="tokenInput" type="password" placeholder="github_pat_…" autocomplete="off">
+  <div class="row">
+    <button id="tokenCancel" type="button">Cancel</button>
+    <button id="tokenOk" class="primary" type="button">Save token</button>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  "use strict";
+  // ---- repo coordinates (single source of truth for the API paths) ----
+  var OWNER = "uipathlabs-dev";
+  var REPO = "arena-roadmap";
+  var FILE = "data.json";
+  var BRANCH = "main";
+  var API = "https://api.github.com/repos/" + OWNER + "/" + REPO + "/contents/" + FILE;
+  var TOKEN_KEY = "arena-roadmap-token";
+
+  var STATUSES = ["live", "prog", "plan", "backlog", "dropped"];
+  var LABELS = { live: "LIVE", prog: "IN PROGRESS", plan: "PLANNED", backlog: "BACKLOG", dropped: "DROPPED" };
+
+  var state = null;       // working copy (mutated by edits)
+  var baseline = null;    // deep copy as loaded (for dirty detection + merge)
+  var fileSha = null;     // sha of data.json at load time
+  var editing = false;
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  function token() { try { return localStorage.getItem(TOKEN_KEY) || ""; } catch (e) { return ""; } }
+  function deep(o) { return JSON.parse(JSON.stringify(o)); }
+
+  // ---------- data access helpers ----------
+  function allItems(data, fn) {
+    data.sections.forEach(function (sec) {
+      (function walk(items) {
+        items.forEach(function (it) { fn(it, sec); walk(it.children || []); });
+      })(sec.items || []);
+    });
+  }
+  function findItem(data, id) {
+    var hit = null;
+    allItems(data, function (it) { if (it.id === id) hit = it; });
+    return hit;
+  }
+  function findSection(data, id) {
+    return data.sections.filter(function (s) { return s.id === id; })[0] || null;
+  }
+
+  // ---------- change tracking ----------
+  function collectChanges() {
+    var changes = [];
+    state.sections.forEach(function (sec) {
+      var base = findSection(baseline, sec.id);
+      if (!base) return;
+      ["purpose", "stakeholders", "audience"].forEach(function (f) {
+        if ((sec[f] || "") !== (base[f] || "")) changes.push({ kind: "section", id: sec.id, field: f, value: sec[f] || "" });
+      });
+    });
+    allItems(state, function (it) {
+      var base = findItem(baseline, it.id);
+      if (base && it.status !== base.status) changes.push({ kind: "item", id: it.id, field: "status", value: it.status });
+    });
+    return changes;
+  }
+  function applyChanges(target, changes) {
+    changes.forEach(function (c) {
+      if (c.kind === "section") {
+        var s = findSection(target, c.id);
+        if (s) s[c.field] = c.value;
+      } else {
+        var it = findItem(target, c.id);
+        if (it) it.status = c.value;
+      }
+    });
+  }
+  function refreshDirtyUi() {
+    var n = collectChanges().length;
+    $("saveBtn").disabled = !editing || n === 0;
+    $("saveState").className = "";
+    $("saveState").textContent = n ? n + " unsaved change" + (n === 1 ? "" : "s") : "";
+  }
+  window.addEventListener("beforeunload", function (e) {
+    if (collectChanges().length) { e.preventDefault(); e.returnValue = ""; }
+  });
+
+  // ---------- rendering ----------
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (ch) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch];
+    });
+  }
+
+  function render() {
+    document.title = state.meta.title + " — Roadmap";
+    $("title").textContent = state.meta.title;
+    $("subtitle").textContent = state.meta.subtitle || "";
+    var f = $("foundation");
+    f.hidden = !state.meta.foundation;
+    f.innerHTML = "<b>Foundation logic:</b> " + esc(state.meta.foundation);
+
+    $("legend").innerHTML = STATUSES.map(function (s) {
+      return '<span class="lg"><span class="chip c-' + s + '">' + LABELS[s].toLowerCase() + "</span> " + esc(state.meta.statuses[s] || "") + "</span>";
+    }).join("");
+
+    var app = $("app");
+    app.innerHTML = "";
+    state.sections.forEach(function (sec) {
+      var det = document.createElement("details");
+      det.className = "section-block";
+      det.open = true;
+      var tagHtml = sec.tag ? ' <span class="tag">' + esc(sec.tag) + "</span>" : "";
+      det.innerHTML =
+        "<summary><span class=\"chev\"></span><span class=\"st\">" + esc(sec.name) + "</span>" + tagHtml +
+        '<span class="sp">' + esc(sec.purpose || "") + "</span></summary>";
+
+      var fields = document.createElement("div");
+      fields.className = "section-fields";
+      [["purpose", "Section purpose"], ["stakeholders", "Stakeholders"], ["audience", "Target audience"]].forEach(function (pair) {
+        var key = pair[0], label = pair[1];
+        var box = document.createElement("div");
+        box.className = "sf";
+        box.dataset.sec = sec.id;
+        box.dataset.field = key;
+        var lab = document.createElement("label");
+        lab.textContent = label;
+        var ta = document.createElement("textarea");
+        ta.value = sec[key] || "";
+        ta.placeholder = editing ? "Type here…" : "—";
+        ta.disabled = !editing;
+        ta.addEventListener("input", function () {
+          sec[key] = ta.value;
+          var base = findSection(baseline, sec.id);
+          box.classList.toggle("dirty", !!base && (ta.value || "") !== (base[key] || ""));
+          if (key === "purpose") det.querySelector(".sp").textContent = ta.value;
+          refreshDirtyUi();
+        });
+        box.appendChild(lab);
+        box.appendChild(ta);
+        fields.appendChild(box);
+      });
+      det.appendChild(fields);
+
+      det.appendChild(renderTree(sec.items || [], sec));
+      app.appendChild(det);
+    });
+    refreshDirtyUi();
+  }
+
+  function renderTree(items, sec) {
+    var ul = document.createElement("ul");
+    ul.className = "tree";
+    items.forEach(function (it) { ul.appendChild(renderItem(it, sec)); });
+    return ul;
+  }
+
+  function renderItem(it, sec) {
+    var li = document.createElement("li");
+    var node = document.createElement("span");
+    node.className = "node";
+    node.dataset.item = it.id;
+
+    var nh = document.createElement("span");
+    nh.className = "nh";
+    var b = document.createElement("b");
+    b.textContent = it.name;
+    nh.appendChild(b);
+
+    var sel = document.createElement("select");
+    sel.className = "status s-" + it.status;
+    sel.disabled = !editing;
+    STATUSES.forEach(function (s) {
+      var opt = document.createElement("option");
+      opt.value = s;
+      opt.textContent = LABELS[s];
+      if (s === it.status) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    sel.addEventListener("change", function () {
+      it.status = sel.value;
+      sel.className = "status s-" + sel.value;
+      var base = findItem(baseline, it.id);
+      node.classList.toggle("dirty", !!base && base.status !== it.status);
+      refreshDirtyUi();
+    });
+    nh.appendChild(sel);
+    node.appendChild(nh);
+
+    if (it.desc) {
+      var p = document.createElement("span");
+      p.className = "purpose";
+      p.textContent = it.desc;
+      node.appendChild(p);
+    }
+    li.appendChild(node);
+    if (it.children && it.children.length) {
+      var ul = document.createElement("ul");
+      it.children.forEach(function (c) { ul.appendChild(renderItem(c, sec)); });
+      li.appendChild(ul);
+    }
+    return li;
+  }
+
+  // ---------- load / save ----------
+  function setStatusMsg(msg, isErr) {
+    $("saveState").textContent = msg;
+    $("saveState").className = isErr ? "err" : "";
+  }
+
+  function load() {
+    // Read through the API (not the Pages copy) so we always see the latest
+    // commit immediately and get the sha needed for writes.
+    var headers = { Accept: "application/vnd.github+json" };
+    if (token()) headers.Authorization = "Bearer " + token();
+    return fetch(API + "?ref=" + BRANCH + "&t=" + Date.now(), { headers: headers })
+      .then(function (r) {
+        if (!r.ok) throw new Error("Could not load data.json (HTTP " + r.status + ")");
+        return r.json();
+      })
+      .then(function (j) {
+        fileSha = j.sha;
+        var text = decodeURIComponent(escape(atob(j.content.replace(/\n/g, ""))));
+        state = JSON.parse(text);
+        baseline = deep(state);
+        render();
+        $("foot").innerHTML = "Data: <a href=\"https://github.com/" + OWNER + "/" + REPO + "/commits/" + BRANCH + "/" + FILE + "\">commit history</a> · every save is a git commit";
+      })
+      .catch(function (e) { setStatusMsg(e.message, true); });
+  }
+
+  function save() {
+    var changes = collectChanges();
+    if (!changes.length) return;
+    if (!token()) { openTokenDialog(); return; }
+    $("saveBtn").disabled = true;
+    setStatusMsg("Saving…");
+
+    var headers = {
+      Accept: "application/vnd.github+json",
+      Authorization: "Bearer " + token(),
+      "Content-Type": "application/json"
+    };
+    // Re-read first so concurrent edits from others are preserved: apply OUR
+    // changed fields on top of the freshest remote copy, then write with its sha.
+    fetch(API + "?ref=" + BRANCH + "&t=" + Date.now(), { headers: headers })
+      .then(function (r) {
+        if (!r.ok) throw new Error("Pre-save read failed (HTTP " + r.status + ")");
+        return r.json();
+      })
+      .then(function (j) {
+        var remote = JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g, "")))));
+        applyChanges(remote, changes);
+        var body = {
+          message: "roadmap: " + changes.length + " change" + (changes.length === 1 ? "" : "s") + " via web app",
+          content: btoa(unescape(encodeURIComponent(JSON.stringify(remote, null, 2) + "\n"))),
+          sha: j.sha,
+          branch: BRANCH
+        };
+        return fetch(API, { method: "PUT", headers: headers, body: JSON.stringify(body) });
+      })
+      .then(function (r) {
+        if (r.status === 409) throw new Error("Edit conflict — hit Save again.");
+        if (r.status === 401 || r.status === 403) throw new Error("Token rejected — check its permissions.");
+        if (!r.ok) throw new Error("Save failed (HTTP " + r.status + ")");
+        return r.json();
+      })
+      .then(function (j) {
+        fileSha = j.content.sha;
+        baseline = deep(state);
+        document.querySelectorAll(".dirty").forEach(function (el) { el.classList.remove("dirty"); });
+        refreshDirtyUi();
+        setStatusMsg("Saved ✓");
+        setTimeout(function () { if ($("saveState").textContent === "Saved ✓") setStatusMsg(""); }, 2500);
+      })
+      .catch(function (e) {
+        setStatusMsg(e.message, true);
+        $("saveBtn").disabled = false;
+      });
+  }
+
+  // ---------- editing mode / token ----------
+  function openTokenDialog() {
+    $("tokenInput").value = token();
+    $("tokenDialog").showModal();
+  }
+  function setEditing(on) {
+    editing = on;
+    $("editBtn").textContent = on ? "Editing enabled" : "Enable editing";
+    $("editBtn").disabled = on;
+    $("hint").innerHTML = on
+      ? "Change statuses and section fields, then hit <b>Save changes</b> — each save is a git commit visible to everyone."
+      : 'Read-only view. Click <b>Enable editing</b> and paste your GitHub token to make changes.';
+    render();
+  }
+
+  $("editBtn").addEventListener("click", function () {
+    if (token()) setEditing(true); else openTokenDialog();
+  });
+  $("tokenOk").addEventListener("click", function () {
+    var v = $("tokenInput").value.trim();
+    if (v) {
+      try { localStorage.setItem(TOKEN_KEY, v); } catch (e) {}
+      $("tokenDialog").close();
+      setEditing(true);
+    }
+  });
+  $("tokenCancel").addEventListener("click", function () { $("tokenDialog").close(); });
+  $("saveBtn").addEventListener("click", save);
+  $("reloadBtn").addEventListener("click", function () {
+    if (collectChanges().length && !confirm("Discard unsaved changes and reload?")) return;
+    load();
+  });
+
+  load();
+})();
+</script>
+</body>
+</html>
