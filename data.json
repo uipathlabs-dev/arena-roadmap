@@ -30,14 +30,14 @@
         {
           "id": "lp-ae",
           "name": "AE Workspace",
-          "status": "plan",
+          "status": "backlog",
           "desc": "Seller home — my deals, my territory, my tasks. Moved from Execution; folds into the Launchpad experience.",
           "children": []
         },
         {
           "id": "lp-mgr",
           "name": "Manager Workspace",
-          "status": "plan",
+          "status": "backlog",
           "desc": "Team rollups, rep performance, coaching. Moved from Execution; folds into the Launchpad experience.",
           "children": []
         },
