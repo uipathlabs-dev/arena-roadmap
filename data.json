@@ -122,7 +122,7 @@
       "id": "revenue",
       "name": "Revenue",
       "tag": null,
-      "purpose": "The numbers side — forecast, pipeline, and account truth for the whole org. ETA end of August.",
+      "purpose": "The numbers side — forecast, pipeline, and account truth for the whole org",
       "stakeholders": "",
       "audience": "",
       "items": [
@@ -219,13 +219,6 @@
               "children": []
             }
           ]
-        },
-        {
-          "id": "rev-analytics",
-          "name": "Analytics",
-          "status": "dropped",
-          "desc": "Dropped per review — stage velocity / linearity estimates absorbed elsewhere or out of scope.",
-          "children": []
         }
       ]
     },
@@ -233,7 +226,7 @@
       "id": "ai-agent",
       "name": "AI & Agent Layer",
       "tag": null,
-      "purpose": "Slimmed per review: conversational AI only. Gateway and tooling dropped.",
+      "purpose": "Slimmed per review: conversational AI only using Tribble AI",
       "stakeholders": "",
       "audience": "",
       "items": [
@@ -242,20 +235,6 @@
           "name": "Conversational AI",
           "status": "prog",
           "desc": "Account-scoped chat and on-page chat widgets.",
-          "children": []
-        },
-        {
-          "id": "ai-gateway",
-          "name": "Agent Gateway",
-          "status": "dropped",
-          "desc": "Dropped per review.",
-          "children": []
-        },
-        {
-          "id": "ai-tooling",
-          "name": "Operator Tooling",
-          "status": "dropped",
-          "desc": "Dropped per review.",
           "children": []
         }
       ]
