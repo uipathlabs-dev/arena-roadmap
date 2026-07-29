@@ -22,7 +22,7 @@
       "items": [
         {
           "id": "lp-landing",
-          "name": "Landing",
+          "name": "Landing page",
           "status": "plan",
           "desc": "Persona-based experience. Scope to be defined based on which products / feature flags are released.",
           "children": []
