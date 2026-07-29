@@ -29,10 +29,25 @@
         },
         {
           "id": "lp-ae",
-          "name": "AE Workspace",
+          "name": "Workspace",
           "status": "backlog",
           "desc": "Seller home — my deals, my territory, my tasks. Moved from Execution; folds into the Launchpad experience.",
-          "children": []
+          "children": [
+            {
+              "id": "item-veqto6",
+              "name": "AE Workspace",
+              "status": "plan",
+              "desc": "Seller home — my deals, my territory, my tasks. Moved from Execution; folds into the Launchpad experience.",
+              "children": []
+            },
+            {
+              "id": "item-jvqczy",
+              "name": "Manager Workspace",
+              "status": "plan",
+              "desc": "Team rollups, rep performance, coaching. Moved from Execution; folds into the Launchpad experience.",
+              "children": []
+            }
+          ]
         },
         {
           "id": "lp-mgr",
