@@ -26,14 +26,6 @@
   .foundation { background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 12px 16px; font-size: 14px; max-width: 74ch; }
   .foundation b { color: var(--accent); }
 
-  .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; padding: 12px 0; font-size: 12.5px; color: var(--muted); border-bottom: 1px solid var(--line); }
-  .lg { display: inline-flex; align-items: center; gap: 6px; }
-  .chip { display: inline-block; font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; padding: 2px 8px; border-radius: 2px; white-space: nowrap; }
-  .c-live { background: var(--live-soft); color: var(--live); }
-  .c-prog { background: var(--prog-soft); color: var(--prog); }
-  .c-plan { background: var(--plan-soft); color: var(--plan); }
-  .c-backlog { background: var(--backlog-soft); color: var(--backlog); }
-  .c-dropped { background: var(--dropped-soft); color: var(--dropped); }
   .tag { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); border-radius: 2px; padding: 1px 7px; }
 
   .toolbar { position: sticky; top: 0; z-index: 10; background: var(--paper); display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 0; margin-bottom: 24px; border-bottom: 1px solid var(--line); font-size: 13px; }
@@ -115,6 +107,13 @@
   .sf textarea::placeholder { color: var(--branch); }
   .sf-value { font-size: 13px; color: var(--ink); line-height: 1.45; white-space: pre-wrap; }
   .sf-value.empty { color: var(--branch); font-style: italic; }
+  .sf-row { display: flex; align-items: center; gap: 8px; }
+
+  .eta-row { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+  .eta-cap { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+  .eta-label { font-size: 12.5px; color: var(--ink); }
+  .eta-label b { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-right: 4px; }
+  input.eta-input { font-family: var(--sans); font-size: 12px; border: 1px solid var(--line); border-radius: 3px; padding: 2px 6px; background: var(--card); color: var(--ink); }
 
   .tree, .tree ul { list-style: none; margin: 0; padding: 0; }
   .tree { padding: 8px 0 4px 10px; }
@@ -149,8 +148,6 @@
     <h1 id="title">Loading…</h1>
     <div class="foundation" id="foundation" hidden></div>
   </header>
-
-  <div class="legend" id="legend"></div>
 
   <div class="toolbar">
     <span class="hint" id="hint">Read-only view. Click <b>Enable editing</b> and paste your GitHub token to make changes.</span>
@@ -229,10 +226,22 @@
 
   // ---------- structural edits ----------
   function newItem() {
-    return { id: newId("item"), name: "New item", status: "plan", desc: "", children: [] };
+    return { id: newId("item"), name: "New item", status: "plan", desc: "", eta: "", children: [] };
   }
   function newSection() {
-    return { id: newId("section"), name: "New section", tag: null, purpose: "", stakeholders: "", audience: "", items: [] };
+    return { id: newId("section"), name: "New section", tag: null, purpose: "", stakeholders: "", audience: "", eta: "", items: [] };
+  }
+  // <input type=date> gives "YYYY-MM-DD"; format it without going through
+  // Date parsing (which is UTC-based and can shift the day near midnight
+  // depending on the viewer's timezone).
+  function formatEta(dateStr) {
+    if (!dateStr) return "";
+    var parts = dateStr.split("-");
+    if (parts.length !== 3) return dateStr;
+    var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var y = parts[0], m = parseInt(parts[1], 10) - 1, d = parseInt(parts[2], 10);
+    if (m < 0 || m > 11 || !y || !d) return dateStr;
+    return MONTHS[m] + " " + d + ", " + y;
   }
   function addSection() {
     var sec = newSection();
@@ -288,7 +297,7 @@
     var deletedSec = baseline.sections.filter(function (s) { return !curSec[s.id]; }).length;
     var editedSec = state.sections.filter(function (s) {
       var b = baseSec[s.id]; if (!b) return false;
-      return b.name !== s.name || b.purpose !== s.purpose || b.stakeholders !== s.stakeholders || b.audience !== s.audience;
+      return b.name !== s.name || b.purpose !== s.purpose || b.stakeholders !== s.stakeholders || b.audience !== s.audience || b.eta !== s.eta;
     }).length;
 
     var baseIt = {}; allItems(baseline, function (it) { baseIt[it.id] = it; });
@@ -297,7 +306,7 @@
     Object.keys(curIt).forEach(function (id) {
       var b = baseIt[id], c = curIt[id];
       if (!b) addedIt++;
-      else if (b.name !== c.name || b.status !== c.status || b.desc !== c.desc) editedIt++;
+      else if (b.name !== c.name || b.status !== c.status || b.desc !== c.desc || b.eta !== c.eta) editedIt++;
     });
     Object.keys(baseIt).forEach(function (id) { if (!curIt[id]) deletedIt++; });
 
@@ -331,8 +340,8 @@
       return;
     }
     var changed = kind === "item"
-      ? (base.name !== obj.name || base.status !== obj.status || base.desc !== obj.desc)
-      : (base.name !== obj.name || base.purpose !== obj.purpose || base.stakeholders !== obj.stakeholders || base.audience !== obj.audience);
+      ? (base.name !== obj.name || base.status !== obj.status || base.desc !== obj.desc || base.eta !== obj.eta)
+      : (base.name !== obj.name || base.purpose !== obj.purpose || base.stakeholders !== obj.stakeholders || base.audience !== obj.audience || base.eta !== obj.eta);
     el.classList.toggle("dirty", changed);
     if (slot) {
       if (changed) { slot.textContent = "edited"; slot.className = "badge-slot badge badge-edited"; }
@@ -354,10 +363,6 @@
     var f = $("foundation");
     f.hidden = !state.meta.foundation;
     f.innerHTML = "<b>Foundation logic:</b> " + esc(state.meta.foundation);
-
-    $("legend").innerHTML = STATUSES.map(function (s) {
-      return '<span class="lg"><span class="chip c-' + s + '">' + LABELS[s].toLowerCase() + "</span> " + esc(state.meta.statuses[s] || "") + "</span>";
-    }).join("");
 
     var app = $("app");
     app.innerHTML = "";
@@ -489,6 +494,48 @@
         }
         fields.appendChild(box);
       });
+
+      // ETA is hidden entirely when empty and not editing (unlike the two
+      // fields above, which always show a box with a "—" placeholder).
+      if (editing || sec.eta) {
+        var etaBox = document.createElement("div");
+        etaBox.className = "sf";
+        var etaLab = document.createElement("label");
+        etaLab.textContent = "ETA";
+        etaBox.appendChild(etaLab);
+        if (editing) {
+          var etaRow = document.createElement("div");
+          etaRow.className = "sf-row";
+          var etaInput = document.createElement("input");
+          etaInput.type = "date";
+          etaInput.className = "eta-input";
+          etaInput.value = sec.eta || "";
+          etaInput.addEventListener("input", function () {
+            sec.eta = etaInput.value;
+            refreshNodeBadge(summary, sec, "section");
+            refreshDirtyUi();
+          });
+          etaRow.appendChild(etaInput);
+          var etaClear = document.createElement("button");
+          etaClear.type = "button";
+          etaClear.className = "btn-mini";
+          etaClear.textContent = "clear";
+          etaClear.addEventListener("click", function () {
+            sec.eta = "";
+            etaInput.value = "";
+            refreshNodeBadge(summary, sec, "section");
+            refreshDirtyUi();
+          });
+          etaRow.appendChild(etaClear);
+          etaBox.appendChild(etaRow);
+        } else {
+          var etaVal = document.createElement("div");
+          etaVal.className = "sf-value";
+          etaVal.textContent = formatEta(sec.eta);
+          etaBox.appendChild(etaVal);
+        }
+        fields.appendChild(etaBox);
+      }
       det.appendChild(fields);
 
       det.appendChild(renderTree(sec.items || []));
@@ -638,6 +685,50 @@
       descLabel.className = "purpose";
       descLabel.textContent = it.desc;
       node.appendChild(descLabel);
+    }
+
+    // ETA is hidden entirely when empty and not editing.
+    if (editing || it.eta) {
+      var etaRow = document.createElement("span");
+      etaRow.className = "eta-row";
+      if (editing) {
+        var etaCap = document.createElement("span");
+        etaCap.className = "eta-cap";
+        etaCap.textContent = "ETA";
+        etaRow.appendChild(etaCap);
+
+        var etaInput = document.createElement("input");
+        etaInput.type = "date";
+        etaInput.className = "eta-input";
+        etaInput.value = it.eta || "";
+        etaInput.addEventListener("input", function () {
+          it.eta = etaInput.value;
+          refreshNodeBadge(node, it, "item");
+          refreshDirtyUi();
+        });
+        etaRow.appendChild(etaInput);
+
+        var etaClear = document.createElement("button");
+        etaClear.type = "button";
+        etaClear.className = "btn-mini";
+        etaClear.textContent = "clear";
+        etaClear.addEventListener("click", function () {
+          it.eta = "";
+          etaInput.value = "";
+          refreshNodeBadge(node, it, "item");
+          refreshDirtyUi();
+        });
+        etaRow.appendChild(etaClear);
+      } else {
+        var etaLabel = document.createElement("span");
+        etaLabel.className = "eta-label";
+        var etaCapB = document.createElement("b");
+        etaCapB.textContent = "ETA";
+        etaLabel.appendChild(etaCapB);
+        etaLabel.appendChild(document.createTextNode(" " + formatEta(it.eta)));
+        etaRow.appendChild(etaLabel);
+      }
+      node.appendChild(etaRow);
     }
 
     li.appendChild(node);
