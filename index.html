@@ -294,6 +294,15 @@
   }
 
   // ---------- change tracking (whole-tree, so structural edits are covered) ----------
+  // Single source of truth for "what fields does this kind of node have" —
+  // used by both summarizeChanges() and refreshNodeBadge() so a future field
+  // (like eta was) only needs adding here once.
+  var SECTION_FIELDS = ["name", "purpose", "stakeholders", "audience", "eta"];
+  var ITEM_FIELDS = ["name", "status", "desc", "eta"];
+  function fieldsChanged(base, obj, fields) {
+    return fields.some(function (f) { return base[f] !== obj[f]; });
+  }
+
   function dirty() {
     return JSON.stringify(state.sections) !== JSON.stringify(baseline.sections);
   }
@@ -304,7 +313,7 @@
     var deletedSec = baseline.sections.filter(function (s) { return !curSec[s.id]; }).length;
     var editedSec = state.sections.filter(function (s) {
       var b = baseSec[s.id]; if (!b) return false;
-      return b.name !== s.name || b.purpose !== s.purpose || b.stakeholders !== s.stakeholders || b.audience !== s.audience || b.eta !== s.eta;
+      return fieldsChanged(b, s, SECTION_FIELDS);
     }).length;
 
     var baseIt = {}; allItems(baseline, function (it) { baseIt[it.id] = it; });
@@ -313,7 +322,7 @@
     Object.keys(curIt).forEach(function (id) {
       var b = baseIt[id], c = curIt[id];
       if (!b) addedIt++;
-      else if (b.name !== c.name || b.status !== c.status || b.desc !== c.desc || b.eta !== c.eta) editedIt++;
+      else if (fieldsChanged(b, c, ITEM_FIELDS)) editedIt++;
     });
     Object.keys(baseIt).forEach(function (id) { if (!curIt[id]) deletedIt++; });
 
@@ -346,9 +355,7 @@
       if (slot) { slot.textContent = "new"; slot.className = "badge-slot badge badge-new"; }
       return;
     }
-    var changed = kind === "item"
-      ? (base.name !== obj.name || base.status !== obj.status || base.desc !== obj.desc || base.eta !== obj.eta)
-      : (base.name !== obj.name || base.purpose !== obj.purpose || base.stakeholders !== obj.stakeholders || base.audience !== obj.audience || base.eta !== obj.eta);
+    var changed = fieldsChanged(base, obj, kind === "item" ? ITEM_FIELDS : SECTION_FIELDS);
     el.classList.toggle("dirty", changed);
     if (slot) {
       if (changed) { slot.textContent = "edited"; slot.className = "badge-slot badge badge-edited"; }
@@ -361,6 +368,78 @@
     return String(s).replace(/[&<>"]/g, function (ch) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch];
     });
+  }
+
+  // Shared by every up/down/add/delete/clear control — they're all a
+  // `.btn-mini` with a label, optional title, optional danger styling, and a
+  // click handler.
+  function makeMiniBtn(label, title, onClick, opts) {
+    opts = opts || {};
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "btn-mini" + (opts.danger ? " danger" : "");
+    if (title) btn.title = title;
+    btn.textContent = label;
+    btn.disabled = !!opts.disabled;
+    btn.addEventListener("click", onClick);
+    return btn;
+  }
+
+  // Builds the ETA control for a section or item — returns null when there's
+  // nothing to show (empty and not editing), so callers just skip appending
+  // it. `boxed` selects the section-style labeled box (matching the
+  // Stakeholders/Audience fields); otherwise the compact inline item-style row.
+  function renderEta(obj, kind, badgeTarget, boxed) {
+    if (!editing && !obj.eta) return null;
+
+    var outer = document.createElement(boxed ? "div" : "span");
+    outer.className = boxed ? "sf" : "eta-row";
+    if (boxed) {
+      var lab = document.createElement("label");
+      lab.textContent = "ETA";
+      outer.appendChild(lab);
+    }
+
+    var body = boxed ? document.createElement("div") : outer;
+    if (boxed) body.className = editing ? "sf-row" : "sf-value";
+
+    if (editing) {
+      if (!boxed) {
+        var cap = document.createElement("span");
+        cap.className = "eta-cap";
+        cap.textContent = "ETA";
+        body.appendChild(cap);
+      }
+      var input = document.createElement("input");
+      input.type = "date";
+      input.className = "eta-input";
+      input.value = obj.eta || "";
+      input.addEventListener("input", function () {
+        obj.eta = input.value;
+        refreshNodeBadge(badgeTarget, obj, kind);
+        refreshDirtyUi();
+      });
+      body.appendChild(input);
+      body.appendChild(makeMiniBtn("clear", null, function () {
+        obj.eta = "";
+        input.value = "";
+        refreshNodeBadge(badgeTarget, obj, kind);
+        refreshDirtyUi();
+      }));
+    } else if (boxed) {
+      body.textContent = formatEta(obj.eta);
+    } else {
+      var label = document.createElement("span");
+      label.className = "eta-label";
+      var b = document.createElement("b");
+      b.textContent = "ETA";
+      label.appendChild(b);
+      label.appendChild(document.createTextNode(" " + formatEta(obj.eta)));
+      body.appendChild(label);
+    }
+
+    if (boxed) outer.appendChild(body);
+    return outer;
   }
 
   function render() {
@@ -422,32 +501,9 @@
         var secIdx = state.sections.indexOf(sec);
         var secActions = document.createElement("span");
         secActions.className = "nh-actions";
-
-        var upSecBtn = document.createElement("button");
-        upSecBtn.type = "button";
-        upSecBtn.className = "btn-mini";
-        upSecBtn.title = "Move section up";
-        upSecBtn.textContent = "↑";
-        upSecBtn.disabled = secIdx === 0;
-        upSecBtn.addEventListener("click", function () { moveInArray(state.sections, sec, -1); });
-        secActions.appendChild(upSecBtn);
-
-        var downSecBtn = document.createElement("button");
-        downSecBtn.type = "button";
-        downSecBtn.className = "btn-mini";
-        downSecBtn.title = "Move section down";
-        downSecBtn.textContent = "↓";
-        downSecBtn.disabled = secIdx === state.sections.length - 1;
-        downSecBtn.addEventListener("click", function () { moveInArray(state.sections, sec, 1); });
-        secActions.appendChild(downSecBtn);
-
-        var delSecBtn = document.createElement("button");
-        delSecBtn.type = "button";
-        delSecBtn.className = "btn-mini danger";
-        delSecBtn.textContent = "delete section";
-        delSecBtn.addEventListener("click", function () { deleteSection(sec); });
-        secActions.appendChild(delSecBtn);
-
+        secActions.appendChild(makeMiniBtn("↑", "Move section up", function () { moveInArray(state.sections, sec, -1); }, { disabled: secIdx === 0 }));
+        secActions.appendChild(makeMiniBtn("↓", "Move section down", function () { moveInArray(state.sections, sec, 1); }, { disabled: secIdx === state.sections.length - 1 }));
+        secActions.appendChild(makeMiniBtn("delete section", null, function () { deleteSection(sec); }, { danger: true }));
         summary.appendChild(secActions);
       }
 
@@ -504,45 +560,8 @@
 
       // ETA is hidden entirely when empty and not editing (unlike the two
       // fields above, which always show a box with a "—" placeholder).
-      if (editing || sec.eta) {
-        var etaBox = document.createElement("div");
-        etaBox.className = "sf";
-        var etaLab = document.createElement("label");
-        etaLab.textContent = "ETA";
-        etaBox.appendChild(etaLab);
-        if (editing) {
-          var etaRow = document.createElement("div");
-          etaRow.className = "sf-row";
-          var etaInput = document.createElement("input");
-          etaInput.type = "date";
-          etaInput.className = "eta-input";
-          etaInput.value = sec.eta || "";
-          etaInput.addEventListener("input", function () {
-            sec.eta = etaInput.value;
-            refreshNodeBadge(summary, sec, "section");
-            refreshDirtyUi();
-          });
-          etaRow.appendChild(etaInput);
-          var etaClear = document.createElement("button");
-          etaClear.type = "button";
-          etaClear.className = "btn-mini";
-          etaClear.textContent = "clear";
-          etaClear.addEventListener("click", function () {
-            sec.eta = "";
-            etaInput.value = "";
-            refreshNodeBadge(summary, sec, "section");
-            refreshDirtyUi();
-          });
-          etaRow.appendChild(etaClear);
-          etaBox.appendChild(etaRow);
-        } else {
-          var etaVal = document.createElement("div");
-          etaVal.className = "sf-value";
-          etaVal.textContent = formatEta(sec.eta);
-          etaBox.appendChild(etaVal);
-        }
-        fields.appendChild(etaBox);
-      }
+      var secEta = renderEta(sec, "section", summary, true);
+      if (secEta) fields.appendChild(secEta);
       det.appendChild(fields);
 
       det.appendChild(renderTree(sec.items || []));
@@ -638,39 +657,10 @@
 
     if (editing) {
       var itIdx = parentArray.indexOf(it);
-      var upBtn = document.createElement("button");
-      upBtn.type = "button";
-      upBtn.className = "btn-mini";
-      upBtn.title = "Move up";
-      upBtn.textContent = "↑";
-      upBtn.disabled = itIdx === 0;
-      upBtn.addEventListener("click", function () { moveInArray(parentArray, it, -1); });
-      actions.appendChild(upBtn);
-
-      var downBtn = document.createElement("button");
-      downBtn.type = "button";
-      downBtn.className = "btn-mini";
-      downBtn.title = "Move down";
-      downBtn.textContent = "↓";
-      downBtn.disabled = itIdx === parentArray.length - 1;
-      downBtn.addEventListener("click", function () { moveInArray(parentArray, it, 1); });
-      actions.appendChild(downBtn);
-
-      var addSubBtn = document.createElement("button");
-      addSubBtn.type = "button";
-      addSubBtn.className = "btn-mini";
-      addSubBtn.title = "Add sub-item";
-      addSubBtn.textContent = "+ sub";
-      addSubBtn.addEventListener("click", function () { addItemTo(it.children); });
-      actions.appendChild(addSubBtn);
-
-      var delBtn = document.createElement("button");
-      delBtn.type = "button";
-      delBtn.className = "btn-mini danger";
-      delBtn.title = "Delete";
-      delBtn.textContent = "delete";
-      delBtn.addEventListener("click", function () { deleteItem(parentArray, it); });
-      actions.appendChild(delBtn);
+      actions.appendChild(makeMiniBtn("↑", "Move up", function () { moveInArray(parentArray, it, -1); }, { disabled: itIdx === 0 }));
+      actions.appendChild(makeMiniBtn("↓", "Move down", function () { moveInArray(parentArray, it, 1); }, { disabled: itIdx === parentArray.length - 1 }));
+      actions.appendChild(makeMiniBtn("+ sub", "Add sub-item", function () { addItemTo(it.children); }));
+      actions.appendChild(makeMiniBtn("delete", "Delete", function () { deleteItem(parentArray, it); }, { danger: true }));
     }
     nh.appendChild(actions);
     node.appendChild(nh);
@@ -695,48 +685,8 @@
     }
 
     // ETA is hidden entirely when empty and not editing.
-    if (editing || it.eta) {
-      var etaRow = document.createElement("span");
-      etaRow.className = "eta-row";
-      if (editing) {
-        var etaCap = document.createElement("span");
-        etaCap.className = "eta-cap";
-        etaCap.textContent = "ETA";
-        etaRow.appendChild(etaCap);
-
-        var etaInput = document.createElement("input");
-        etaInput.type = "date";
-        etaInput.className = "eta-input";
-        etaInput.value = it.eta || "";
-        etaInput.addEventListener("input", function () {
-          it.eta = etaInput.value;
-          refreshNodeBadge(node, it, "item");
-          refreshDirtyUi();
-        });
-        etaRow.appendChild(etaInput);
-
-        var etaClear = document.createElement("button");
-        etaClear.type = "button";
-        etaClear.className = "btn-mini";
-        etaClear.textContent = "clear";
-        etaClear.addEventListener("click", function () {
-          it.eta = "";
-          etaInput.value = "";
-          refreshNodeBadge(node, it, "item");
-          refreshDirtyUi();
-        });
-        etaRow.appendChild(etaClear);
-      } else {
-        var etaLabel = document.createElement("span");
-        etaLabel.className = "eta-label";
-        var etaCapB = document.createElement("b");
-        etaCapB.textContent = "ETA";
-        etaLabel.appendChild(etaCapB);
-        etaLabel.appendChild(document.createTextNode(" " + formatEta(it.eta)));
-        etaRow.appendChild(etaLabel);
-      }
-      node.appendChild(etaRow);
-    }
+    var itEta = renderEta(it, "item", node, false);
+    if (itEta) node.appendChild(itEta);
 
     li.appendChild(node);
 
@@ -751,6 +701,15 @@
   }
 
   // ---------- load / save ----------
+  // GitHub's Contents API returns/expects base64 with embedded newlines; shared
+  // by load()'s initial read and save()'s pre-write conflict check.
+  function decodeContent(j) {
+    return decodeURIComponent(escape(atob(j.content.replace(/\n/g, ""))));
+  }
+  function encodeContent(obj) {
+    return btoa(unescape(encodeURIComponent(JSON.stringify(obj, null, 2) + "\n")));
+  }
+
   function setStatusMsg(msg, isErr) {
     $("saveState").textContent = msg;
     $("saveState").className = isErr ? "err" : "";
@@ -767,8 +726,7 @@
         return r.json();
       })
       .then(function (j) {
-        var text = decodeURIComponent(escape(atob(j.content.replace(/\n/g, ""))));
-        state = JSON.parse(text);
+        state = JSON.parse(decodeContent(j));
         baseline = deep(state);
         render();
         $("foot").innerHTML = "Data: <a href=\"https://github.com/" + OWNER + "/" + REPO + "/commits/" + BRANCH + "/" + FILE + "\">commit history</a> · every save is a git commit";
@@ -795,7 +753,7 @@
         return r.json();
       })
       .then(function (j) {
-        var remoteText = decodeURIComponent(escape(atob(j.content.replace(/\n/g, ""))));
+        var remoteText = decodeContent(j);
         var baselineText = JSON.stringify(baseline, null, 2) + "\n";
         if (remoteText.trim() !== baselineText.trim()) {
           var proceed = confirm(
@@ -808,7 +766,7 @@
         var summary = summarizeChanges() || "edits";
         var body = {
           message: "roadmap: " + summary + " via web app",
-          content: btoa(unescape(encodeURIComponent(JSON.stringify(state, null, 2) + "\n"))),
+          content: encodeContent(state),
           sha: j.sha,
           branch: BRANCH
         };
