@@ -91,22 +91,29 @@
         {
           "id": "ik-kb",
           "name": "Knowledge Base",
-          "status": "plan",
+          "status": "live",
           "desc": "Curated records — pain points, proof points, quotes, win-wires — reviewed by humans.",
           "children": []
         },
         {
           "id": "ik-gen",
           "name": "Content Generation",
-          "status": "plan",
+          "status": "live",
           "desc": "Generate emails, battle cards, and narratives. Sync with what is already used in Arena for accounts.",
           "children": []
         },
         {
           "id": "ik-ci",
           "name": "Competitive Intelligence",
-          "status": "plan",
+          "status": "live",
           "desc": "Competitor profiles and battle cards with fact-check QA.",
+          "children": []
+        },
+        {
+          "id": "item-w75vhi",
+          "name": "Abstract to Arena app",
+          "status": "plan",
+          "desc": "Integrate the logic and agents so it covers the entire Arena data",
           "children": []
         }
       ]
