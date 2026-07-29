@@ -316,6 +316,34 @@
           "status": "dropped",
           "desc": "Dropped per review — multi-tenant manifest system out of scope.",
           "children": []
+        },
+        {
+          "id": "item-zl9jzb",
+          "name": "Content Review - Content Hub",
+          "status": "live",
+          "desc": "montior what has been uploaded to Content Hub. Apply tags and extract data from the uploaded content",
+          "children": []
+        },
+        {
+          "id": "item-mt3qoo",
+          "name": "Taxonomy sync - Content Hub",
+          "status": "live",
+          "desc": "Manage the taxonomy across the entire app. Integration with SFDC for Industry, Departments, Usecsaes. Manage the other selection fields: such as products, 3rd party apps etc.",
+          "children": []
+        },
+        {
+          "id": "item-a29q9x",
+          "name": "Intelligence extraction -Content Hub",
+          "status": "live",
+          "desc": "extract Intelligence from the uploaded content - map it to existing Knowledge in Luanchpad",
+          "children": []
+        },
+        {
+          "id": "item-xmbm8p",
+          "name": "Spaces - Content Hub",
+          "status": "live",
+          "desc": "Create and montior the Spaces created in Content Hub for each team",
+          "children": []
         }
       ]
     },
