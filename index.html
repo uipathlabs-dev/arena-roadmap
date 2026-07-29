@@ -54,13 +54,51 @@
   select.status.s-dropped { background: var(--dropped-soft); color: var(--dropped); border-color: var(--dropped); }
 
   details.section-block { margin-bottom: 14px; }
-  details.section-block > summary { list-style: none; cursor: pointer; background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--accent); padding: 11px 16px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  details.section-block > summary { list-style: none; cursor: pointer; background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--accent); padding: 11px 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   details.section-block > summary::-webkit-details-marker { display: none; }
+  details.section-block > summary.dirty { box-shadow: inset 3px 0 0 var(--accent); }
   .chev { width: 0; height: 0; flex: 0 0 auto; border-left: 7px solid var(--accent); border-top: 5px solid transparent; border-bottom: 5px solid transparent; transition: transform .15s ease; }
   details[open] > summary .chev { transform: rotate(90deg); }
   @media (prefers-reduced-motion: reduce) { .chev { transition: none; } }
-  summary .st { font-size: 16.5px; font-weight: 700; letter-spacing: -.01em; }
   summary .sp { font-size: 12.5px; color: var(--muted); flex: 1 1 100%; margin-left: 19px; }
+
+  input.section-title-input {
+    font: inherit; font-weight: 700; font-size: 16.5px; letter-spacing: -.01em; color: var(--ink);
+    border: 1px solid transparent; background: transparent; padding: 2px 6px; border-radius: 3px; min-width: 140px;
+  }
+  input.section-title-input:not(:disabled):hover, input.section-title-input:not(:disabled):focus { border-color: var(--line); background: var(--paper); }
+  input.section-title-input:disabled { cursor: default; }
+
+  input.name-input {
+    font: inherit; font-weight: 600; font-size: 14.5px; color: var(--ink);
+    border: 1px solid transparent; background: transparent; padding: 2px 4px; border-radius: 3px; min-width: 110px;
+  }
+  input.name-input:not(:disabled):hover, input.name-input:not(:disabled):focus { border-color: var(--line); background: var(--paper); }
+  input.name-input:disabled { cursor: default; }
+
+  textarea.desc-input {
+    width: 100%; font-family: var(--sans); font-size: 12.5px; color: var(--muted);
+    border: 1px solid transparent; background: transparent; padding: 2px 4px; margin-top: 1px;
+    resize: vertical; min-height: 20px; line-height: 1.45; max-width: 70ch; display: block;
+  }
+  textarea.desc-input:not(:disabled):hover, textarea.desc-input:not(:disabled):focus { border-color: var(--line); background: var(--paper); color: var(--ink); }
+  textarea.desc-input:disabled { cursor: default; }
+  textarea.desc-input::placeholder { color: var(--branch); }
+
+  .badge-slot:empty { display: none; }
+  .badge { font-family: var(--mono); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; padding: 1px 6px; border-radius: 2px; }
+  .badge-new { background: var(--live-soft); color: var(--live); }
+  .badge-edited { background: var(--accent-soft); color: var(--accent); }
+
+  .btn-mini { font-family: var(--mono); font-size: 10px; letter-spacing: .04em; text-transform: uppercase; border: 1px solid var(--line); background: var(--card); color: var(--muted); padding: 2px 8px; border-radius: 3px; cursor: pointer; white-space: nowrap; }
+  .btn-mini:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-mini.danger:hover { border-color: var(--dropped); color: var(--dropped); }
+
+  .btn-add-item { font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; border: 1px dashed var(--branch); background: transparent; color: var(--muted); padding: 6px 12px; border-radius: 2px; cursor: pointer; margin: 8px 0 4px 10px; }
+  .btn-add-item:hover { border-color: var(--accent); color: var(--accent); }
+
+  .btn-add-section { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; border: 1px dashed var(--muted); background: transparent; color: var(--muted); padding: 10px 16px; border-radius: 2px; cursor: pointer; width: 100%; text-align: center; }
+  .btn-add-section:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
 
   .section-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; padding: 12px 0 4px 10px; }
   .sf { background: var(--card); border: 1px dashed var(--line); padding: 9px 12px; }
@@ -78,12 +116,9 @@
   .tree li:last-child::before { height: 24px; bottom: auto; }
 
   .node { background: var(--card); border: 1px solid var(--line); padding: 9px 14px; display: block; }
-  .node .nh { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .node .nh b { font-size: 14.5px; }
-  .node .nh select.status { margin-left: auto; }
-  .node .purpose { font-size: 12.5px; color: var(--muted); margin-top: 1px; max-width: 70ch; }
+  .node .nh { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .node .nh-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
   .node.dirty { box-shadow: inset 3px 0 0 var(--accent); }
-  .sf.dirty { border-style: solid; border-color: var(--accent); }
 
   dialog { border: 1px solid var(--ink); border-radius: 4px; padding: 22px; max-width: 460px; font-family: var(--sans); }
   dialog::backdrop { background: rgba(27,39,51,.45); }
@@ -146,9 +181,9 @@
   var LABELS = { live: "LIVE", prog: "IN PROGRESS", plan: "PLANNED", backlog: "BACKLOG", dropped: "DROPPED" };
 
   var state = null;       // working copy (mutated by edits)
-  var baseline = null;    // deep copy as loaded (for dirty detection + merge)
-  var fileSha = null;     // sha of data.json at load time
+  var baseline = null;    // deep copy as loaded (for dirty detection + conflict check)
   var editing = false;
+  var pendingFocus = null; // element id to focus after the next full render()
 
   var $ = function (id) { return document.getElementById(id); };
 
@@ -171,43 +206,116 @@
   function findSection(data, id) {
     return data.sections.filter(function (s) { return s.id === id; })[0] || null;
   }
-
-  // ---------- change tracking ----------
-  function collectChanges() {
-    var changes = [];
-    state.sections.forEach(function (sec) {
-      var base = findSection(baseline, sec.id);
-      if (!base) return;
-      ["purpose", "stakeholders", "audience"].forEach(function (f) {
-        if ((sec[f] || "") !== (base[f] || "")) changes.push({ kind: "section", id: sec.id, field: f, value: sec[f] || "" });
-      });
-    });
-    allItems(state, function (it) {
-      var base = findItem(baseline, it.id);
-      if (base && it.status !== base.status) changes.push({ kind: "item", id: it.id, field: "status", value: it.status });
-    });
-    return changes;
+  function allIds() {
+    var s = {};
+    state.sections.forEach(function (sec) { s[sec.id] = true; });
+    allItems(state, function (it) { s[it.id] = true; });
+    return s;
   }
-  function applyChanges(target, changes) {
-    changes.forEach(function (c) {
-      if (c.kind === "section") {
-        var s = findSection(target, c.id);
-        if (s) s[c.field] = c.value;
-      } else {
-        var it = findItem(target, c.id);
-        if (it) it.status = c.value;
-      }
+  function newId(prefix) {
+    var used = allIds(), id;
+    do { id = prefix + "-" + Math.random().toString(36).slice(2, 8); } while (used[id]);
+    return id;
+  }
+
+  // ---------- structural edits ----------
+  function newItem() {
+    return { id: newId("item"), name: "New item", status: "plan", desc: "", children: [] };
+  }
+  function newSection() {
+    return { id: newId("section"), name: "New section", tag: null, purpose: "", stakeholders: "", audience: "", items: [] };
+  }
+  function addSection() {
+    var sec = newSection();
+    state.sections.push(sec);
+    pendingFocus = "sectitle-" + sec.id;
+    render();
+  }
+  function deleteSection(sec) {
+    var count = 0;
+    (function walk(items) { items.forEach(function (it) { count++; walk(it.children || []); }); })(sec.items || []);
+    var msg = 'Delete section "' + sec.name + '"' + (count ? " and its " + count + " item" + (count === 1 ? "" : "s") : "") +
+      "? This can't be undone here (git history keeps the old version).";
+    if (!confirm(msg)) return;
+    state.sections = state.sections.filter(function (s) { return s !== sec; });
+    render();
+  }
+  function addItemTo(array) {
+    var it = newItem();
+    array.push(it);
+    pendingFocus = "itemname-" + it.id;
+    render();
+  }
+  function deleteItem(array, it) {
+    var count = 0;
+    (function walk(items) { items.forEach(function (c) { count++; walk(c.children || []); }); })(it.children || []);
+    var msg = 'Delete "' + it.name + '"' + (count ? " and its " + count + " sub-item" + (count === 1 ? "" : "s") : "") + "?";
+    if (!confirm(msg)) return;
+    var idx = array.indexOf(it);
+    if (idx > -1) array.splice(idx, 1);
+    render();
+  }
+
+  // ---------- change tracking (whole-tree, so structural edits are covered) ----------
+  function dirty() {
+    return JSON.stringify(state.sections) !== JSON.stringify(baseline.sections);
+  }
+  function summarizeChanges() {
+    var baseSec = {}; baseline.sections.forEach(function (s) { baseSec[s.id] = s; });
+    var curSec = {}; state.sections.forEach(function (s) { curSec[s.id] = s; });
+    var addedSec = state.sections.filter(function (s) { return !baseSec[s.id]; }).length;
+    var deletedSec = baseline.sections.filter(function (s) { return !curSec[s.id]; }).length;
+    var editedSec = state.sections.filter(function (s) {
+      var b = baseSec[s.id]; if (!b) return false;
+      return b.name !== s.name || b.purpose !== s.purpose || b.stakeholders !== s.stakeholders || b.audience !== s.audience;
+    }).length;
+
+    var baseIt = {}; allItems(baseline, function (it) { baseIt[it.id] = it; });
+    var curIt = {}; allItems(state, function (it) { curIt[it.id] = it; });
+    var addedIt = 0, deletedIt = 0, editedIt = 0;
+    Object.keys(curIt).forEach(function (id) {
+      var b = baseIt[id], c = curIt[id];
+      if (!b) addedIt++;
+      else if (b.name !== c.name || b.status !== c.status || b.desc !== c.desc) editedIt++;
     });
+    Object.keys(baseIt).forEach(function (id) { if (!curIt[id]) deletedIt++; });
+
+    var added = addedSec + addedIt, deleted = deletedSec + deletedIt, edited = editedSec + editedIt;
+    var parts = [];
+    if (added) parts.push(added + " added");
+    if (edited) parts.push(edited + " edited");
+    if (deleted) parts.push(deleted + " deleted");
+    return parts.join(", ");
   }
   function refreshDirtyUi() {
-    var n = collectChanges().length;
-    $("saveBtn").disabled = !editing || n === 0;
+    var d = dirty();
+    $("saveBtn").disabled = !editing || !d;
     $("saveState").className = "";
-    $("saveState").textContent = n ? n + " unsaved change" + (n === 1 ? "" : "s") : "";
+    $("saveState").textContent = d ? summarizeChanges() : "";
   }
   window.addEventListener("beforeunload", function (e) {
-    if (collectChanges().length) { e.preventDefault(); e.returnValue = ""; }
+    if (dirty()) { e.preventDefault(); e.returnValue = ""; }
   });
+
+  // Updates the small "new"/"edited" badge + dirty stripe on a live node, without
+  // a full re-render (so the user's cursor/focus isn't disturbed while typing).
+  function refreshNodeBadge(el, obj, kind) {
+    var slot = el.querySelector(".badge-slot");
+    var base = kind === "item" ? findItem(baseline, obj.id) : findSection(baseline, obj.id);
+    if (!base) {
+      el.classList.add("dirty");
+      if (slot) { slot.textContent = "new"; slot.className = "badge-slot badge badge-new"; }
+      return;
+    }
+    var changed = kind === "item"
+      ? (base.name !== obj.name || base.status !== obj.status || base.desc !== obj.desc)
+      : (base.name !== obj.name || base.purpose !== obj.purpose || base.stakeholders !== obj.stakeholders || base.audience !== obj.audience);
+    el.classList.toggle("dirty", changed);
+    if (slot) {
+      if (changed) { slot.textContent = "edited"; slot.className = "badge-slot badge badge-edited"; }
+      else { slot.textContent = ""; slot.className = "badge-slot"; }
+    }
+  }
 
   // ---------- rendering ----------
   function esc(s) {
@@ -230,14 +338,61 @@
 
     var app = $("app");
     app.innerHTML = "";
+
     state.sections.forEach(function (sec) {
       var det = document.createElement("details");
       det.className = "section-block";
       det.open = true;
-      var tagHtml = sec.tag ? ' <span class="tag">' + esc(sec.tag) + "</span>" : "";
-      det.innerHTML =
-        "<summary><span class=\"chev\"></span><span class=\"st\">" + esc(sec.name) + "</span>" + tagHtml +
-        '<span class="sp">' + esc(sec.purpose || "") + "</span></summary>";
+
+      var summary = document.createElement("summary");
+      summary.addEventListener("click", function (e) {
+        if (e.target.closest("input, textarea, select, button")) e.preventDefault();
+      });
+
+      var chev = document.createElement("span");
+      chev.className = "chev";
+      summary.appendChild(chev);
+
+      var titleInput = document.createElement("input");
+      titleInput.type = "text";
+      titleInput.id = "sectitle-" + sec.id;
+      titleInput.className = "section-title-input";
+      titleInput.value = sec.name;
+      titleInput.disabled = !editing;
+      titleInput.addEventListener("input", function () {
+        sec.name = titleInput.value;
+        refreshNodeBadge(summary, sec, "section");
+        refreshDirtyUi();
+      });
+      summary.appendChild(titleInput);
+
+      var secBadge = document.createElement("span");
+      secBadge.className = "badge-slot";
+      summary.appendChild(secBadge);
+
+      if (sec.tag) {
+        var tagEl = document.createElement("span");
+        tagEl.className = "tag";
+        tagEl.textContent = sec.tag;
+        summary.appendChild(tagEl);
+      }
+
+      if (editing) {
+        var delSecBtn = document.createElement("button");
+        delSecBtn.type = "button";
+        delSecBtn.className = "btn-mini danger";
+        delSecBtn.style.marginLeft = "auto";
+        delSecBtn.textContent = "delete section";
+        delSecBtn.addEventListener("click", function () { deleteSection(sec); });
+        summary.appendChild(delSecBtn);
+      }
+
+      var spPreview = document.createElement("span");
+      spPreview.className = "sp";
+      spPreview.textContent = sec.purpose || "";
+      summary.appendChild(spPreview);
+
+      det.appendChild(summary);
 
       var fields = document.createElement("div");
       fields.className = "section-fields";
@@ -245,8 +400,6 @@
         var key = pair[0], label = pair[1];
         var box = document.createElement("div");
         box.className = "sf";
-        box.dataset.sec = sec.id;
-        box.dataset.field = key;
         var lab = document.createElement("label");
         lab.textContent = label;
         var ta = document.createElement("textarea");
@@ -255,9 +408,8 @@
         ta.disabled = !editing;
         ta.addEventListener("input", function () {
           sec[key] = ta.value;
-          var base = findSection(baseline, sec.id);
-          box.classList.toggle("dirty", !!base && (ta.value || "") !== (base[key] || ""));
-          if (key === "purpose") det.querySelector(".sp").textContent = ta.value;
+          if (key === "purpose") spPreview.textContent = ta.value;
+          refreshNodeBadge(summary, sec, "section");
           refreshDirtyUi();
         });
         box.appendChild(lab);
@@ -266,30 +418,72 @@
       });
       det.appendChild(fields);
 
-      det.appendChild(renderTree(sec.items || [], sec));
+      det.appendChild(renderTree(sec.items || []));
+
+      if (editing) {
+        var addItemBtn = document.createElement("button");
+        addItemBtn.type = "button";
+        addItemBtn.className = "btn-add-item";
+        addItemBtn.textContent = "+ Add item";
+        addItemBtn.addEventListener("click", function () { addItemTo(sec.items); });
+        det.appendChild(addItemBtn);
+      }
+
       app.appendChild(det);
+      refreshNodeBadge(summary, sec, "section");
     });
+
+    if (editing) {
+      var addSecBtn = document.createElement("button");
+      addSecBtn.type = "button";
+      addSecBtn.className = "btn-add-section";
+      addSecBtn.textContent = "+ Add section";
+      addSecBtn.addEventListener("click", addSection);
+      app.appendChild(addSecBtn);
+    }
+
+    if (pendingFocus) {
+      var toFocus = document.getElementById(pendingFocus);
+      if (toFocus) { toFocus.focus(); if (toFocus.select) toFocus.select(); }
+      pendingFocus = null;
+    }
     refreshDirtyUi();
   }
 
-  function renderTree(items, sec) {
+  function renderTree(items) {
     var ul = document.createElement("ul");
     ul.className = "tree";
-    items.forEach(function (it) { ul.appendChild(renderItem(it, sec)); });
+    items.forEach(function (it) { ul.appendChild(renderItem(it, items)); });
     return ul;
   }
 
-  function renderItem(it, sec) {
+  function renderItem(it, parentArray) {
     var li = document.createElement("li");
     var node = document.createElement("span");
     node.className = "node";
-    node.dataset.item = it.id;
 
     var nh = document.createElement("span");
     nh.className = "nh";
-    var b = document.createElement("b");
-    b.textContent = it.name;
-    nh.appendChild(b);
+
+    var nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.id = "itemname-" + it.id;
+    nameInput.className = "name-input";
+    nameInput.value = it.name;
+    nameInput.disabled = !editing;
+    nameInput.addEventListener("input", function () {
+      it.name = nameInput.value;
+      refreshNodeBadge(node, it, "item");
+      refreshDirtyUi();
+    });
+    nh.appendChild(nameInput);
+
+    var badge = document.createElement("span");
+    badge.className = "badge-slot";
+    nh.appendChild(badge);
+
+    var actions = document.createElement("span");
+    actions.className = "nh-actions";
 
     var sel = document.createElement("select");
     sel.className = "status s-" + it.status;
@@ -304,25 +498,53 @@
     sel.addEventListener("change", function () {
       it.status = sel.value;
       sel.className = "status s-" + sel.value;
-      var base = findItem(baseline, it.id);
-      node.classList.toggle("dirty", !!base && base.status !== it.status);
+      refreshNodeBadge(node, it, "item");
       refreshDirtyUi();
     });
-    nh.appendChild(sel);
+    actions.appendChild(sel);
+
+    if (editing) {
+      var addSubBtn = document.createElement("button");
+      addSubBtn.type = "button";
+      addSubBtn.className = "btn-mini";
+      addSubBtn.title = "Add sub-item";
+      addSubBtn.textContent = "+ sub";
+      addSubBtn.addEventListener("click", function () { addItemTo(it.children); });
+      actions.appendChild(addSubBtn);
+
+      var delBtn = document.createElement("button");
+      delBtn.type = "button";
+      delBtn.className = "btn-mini danger";
+      delBtn.title = "Delete";
+      delBtn.textContent = "delete";
+      delBtn.addEventListener("click", function () { deleteItem(parentArray, it); });
+      actions.appendChild(delBtn);
+    }
+    nh.appendChild(actions);
     node.appendChild(nh);
 
-    if (it.desc) {
-      var p = document.createElement("span");
-      p.className = "purpose";
-      p.textContent = it.desc;
-      node.appendChild(p);
-    }
+    var descArea = document.createElement("textarea");
+    descArea.className = "desc-input";
+    descArea.rows = 1;
+    descArea.placeholder = editing ? "Description…" : "";
+    descArea.value = it.desc || "";
+    descArea.disabled = !editing;
+    descArea.addEventListener("input", function () {
+      it.desc = descArea.value;
+      refreshNodeBadge(node, it, "item");
+      refreshDirtyUi();
+    });
+    node.appendChild(descArea);
+
     li.appendChild(node);
+
     if (it.children && it.children.length) {
       var ul = document.createElement("ul");
-      it.children.forEach(function (c) { ul.appendChild(renderItem(c, sec)); });
+      it.children.forEach(function (c) { ul.appendChild(renderItem(c, it.children)); });
       li.appendChild(ul);
     }
+
+    refreshNodeBadge(node, it, "item");
     return li;
   }
 
@@ -343,7 +565,6 @@
         return r.json();
       })
       .then(function (j) {
-        fileSha = j.sha;
         var text = decodeURIComponent(escape(atob(j.content.replace(/\n/g, ""))));
         state = JSON.parse(text);
         baseline = deep(state);
@@ -354,30 +575,38 @@
   }
 
   function save() {
-    var changes = collectChanges();
-    if (!changes.length) return;
+    if (!dirty()) return;
     if (!token()) { openTokenDialog(); return; }
     $("saveBtn").disabled = true;
-    setStatusMsg("Saving…");
+    setStatusMsg("Checking for newer changes…");
 
     var headers = {
       Accept: "application/vnd.github+json",
       Authorization: "Bearer " + token(),
       "Content-Type": "application/json"
     };
-    // Re-read first so concurrent edits from others are preserved: apply OUR
-    // changed fields on top of the freshest remote copy, then write with its sha.
+    var CANCELLED = { cancelled: true };
+
     fetch(API + "?ref=" + BRANCH + "&t=" + Date.now(), { headers: headers })
       .then(function (r) {
         if (!r.ok) throw new Error("Pre-save read failed (HTTP " + r.status + ")");
         return r.json();
       })
       .then(function (j) {
-        var remote = JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g, "")))));
-        applyChanges(remote, changes);
+        var remoteText = decodeURIComponent(escape(atob(j.content.replace(/\n/g, ""))));
+        var baselineText = JSON.stringify(baseline, null, 2) + "\n";
+        if (remoteText.trim() !== baselineText.trim()) {
+          var proceed = confirm(
+            "Someone else saved changes to the roadmap since you loaded this page.\n\n" +
+            "Overwrite the live file with your version? Their changes stay recoverable " +
+            "from git history either way. Click Cancel to reload instead."
+          );
+          if (!proceed) throw CANCELLED;
+        }
+        var summary = summarizeChanges() || "edits";
         var body = {
-          message: "roadmap: " + changes.length + " change" + (changes.length === 1 ? "" : "s") + " via web app",
-          content: btoa(unescape(encodeURIComponent(JSON.stringify(remote, null, 2) + "\n"))),
+          message: "roadmap: " + summary + " via web app",
+          content: btoa(unescape(encodeURIComponent(JSON.stringify(state, null, 2) + "\n"))),
           sha: j.sha,
           branch: BRANCH
         };
@@ -389,17 +618,17 @@
         if (!r.ok) throw new Error("Save failed (HTTP " + r.status + ")");
         return r.json();
       })
-      .then(function (j) {
-        fileSha = j.content.sha;
+      .then(function () {
         baseline = deep(state);
-        document.querySelectorAll(".dirty").forEach(function (el) { el.classList.remove("dirty"); });
         refreshDirtyUi();
+        render();
         setStatusMsg("Saved ✓");
         setTimeout(function () { if ($("saveState").textContent === "Saved ✓") setStatusMsg(""); }, 2500);
       })
       .catch(function (e) {
-        setStatusMsg(e.message, true);
-        $("saveBtn").disabled = false;
+        if (e === CANCELLED) setStatusMsg("Save cancelled — click Reload to see the latest.", true);
+        else setStatusMsg((e && e.message) || "Save failed", true);
+        refreshDirtyUi();
       });
   }
 
@@ -413,7 +642,7 @@
     $("editBtn").textContent = on ? "Editing enabled" : "Enable editing";
     $("editBtn").disabled = on;
     $("hint").innerHTML = on
-      ? "Change statuses and section fields, then hit <b>Save changes</b> — each save is a git commit visible to everyone."
+      ? "Edit names, statuses, descriptions, and section fields inline; use + Add / delete to restructure. Hit <b>Save changes</b> when done — each save is a git commit visible to everyone."
       : 'Read-only view. Click <b>Enable editing</b> and paste your GitHub token to make changes.';
     render();
   }
@@ -432,7 +661,7 @@
   $("tokenCancel").addEventListener("click", function () { $("tokenDialog").close(); });
   $("saveBtn").addEventListener("click", save);
   $("reloadBtn").addEventListener("click", function () {
-    if (collectChanges().length && !confirm("Discard unsaved changes and reload?")) return;
+    if (dirty() && !confirm("Discard unsaved changes and reload?")) return;
     load();
   });
 
