@@ -311,13 +311,6 @@
           "children": []
         },
         {
-          "id": "ad-tenant",
-          "name": "Tenant Configuration",
-          "status": "dropped",
-          "desc": "Dropped per review — multi-tenant manifest system out of scope.",
-          "children": []
-        },
-        {
           "id": "item-zl9jzb",
           "name": "Content Review - Content Hub",
           "status": "live",
@@ -402,6 +395,20 @@
           "name": "Sales Plays & Positioning",
           "status": "backlog",
           "desc": "Additional intelligence output types beyond battle cards.",
+          "children": []
+        },
+        {
+          "id": "item-z6fxpb",
+          "name": "UiPath Labs integration",
+          "status": "backlog",
+          "desc": "Bring the features that we have in UiPath Labs, including demos, sandboxes, workshops",
+          "children": []
+        },
+        {
+          "id": "item-op28rc",
+          "name": "Use Case Explorer",
+          "status": "backlog",
+          "desc": "Migrate the Use Case data coming from the field and map it to the exisitng content we have in Launchpad",
           "children": []
         }
       ]
