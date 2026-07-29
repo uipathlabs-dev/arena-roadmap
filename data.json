@@ -84,7 +84,7 @@
       "id": "intelligence",
       "name": "Intelligence & Knowledge",
       "tag": "abstract layer",
-      "purpose": "Made abstract and reused across all other pages, surfaced based on each page's context — not a standalone destination.",
+      "purpose": "Content generator based on all data uploaded in Arena. First phase to focus on Content Hub, then implement and abstract solution to works on top the entire Arena app and data",
       "stakeholders": "",
       "audience": "",
       "items": [
