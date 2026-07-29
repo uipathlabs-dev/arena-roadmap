@@ -100,6 +100,7 @@
   .btn-mini { font-family: var(--mono); font-size: 10px; letter-spacing: .04em; text-transform: uppercase; border: 1px solid var(--line); background: var(--card); color: var(--muted); padding: 2px 8px; border-radius: 3px; cursor: pointer; white-space: nowrap; }
   .btn-mini:hover { border-color: var(--accent); color: var(--accent); }
   .btn-mini.danger:hover { border-color: var(--dropped); color: var(--dropped); }
+  .btn-mini:disabled { opacity: .35; cursor: default; border-color: var(--line); color: var(--muted); }
 
   .btn-add-item { font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; border: 1px dashed var(--branch); background: transparent; color: var(--muted); padding: 6px 12px; border-radius: 2px; cursor: pointer; margin: 8px 0 4px 10px; }
   .btn-add-item:hover { border-color: var(--accent); color: var(--accent); }
@@ -263,6 +264,18 @@
     if (idx > -1) array.splice(idx, 1);
     render();
   }
+  // Reorders `obj` within `array` by `delta` positions (-1 = up, +1 = down).
+  // Used for both top-level sections and items at any depth (each item's own
+  // parent array — section.items, or another item's .children).
+  function moveInArray(array, obj, delta) {
+    var idx = array.indexOf(obj);
+    if (idx === -1) return;
+    var newIdx = idx + delta;
+    if (newIdx < 0 || newIdx >= array.length) return;
+    array.splice(idx, 1);
+    array.splice(newIdx, 0, obj);
+    render();
+  }
 
   // ---------- change tracking (whole-tree, so structural edits are covered) ----------
   function dirty() {
@@ -299,7 +312,9 @@
     var d = dirty();
     $("saveBtn").disabled = !editing || !d;
     $("saveState").className = "";
-    $("saveState").textContent = d ? summarizeChanges() : "";
+    // A pure reorder changes no name/status/desc, so summarizeChanges() can be
+    // blank even though dirty() is true — fall back to a generic label.
+    $("saveState").textContent = d ? (summarizeChanges() || "reordered") : "";
   }
   window.addEventListener("beforeunload", function (e) {
     if (dirty()) { e.preventDefault(); e.returnValue = ""; }
@@ -392,13 +407,36 @@
       }
 
       if (editing) {
+        var secIdx = state.sections.indexOf(sec);
+        var secActions = document.createElement("span");
+        secActions.className = "nh-actions";
+
+        var upSecBtn = document.createElement("button");
+        upSecBtn.type = "button";
+        upSecBtn.className = "btn-mini";
+        upSecBtn.title = "Move section up";
+        upSecBtn.textContent = "↑";
+        upSecBtn.disabled = secIdx === 0;
+        upSecBtn.addEventListener("click", function () { moveInArray(state.sections, sec, -1); });
+        secActions.appendChild(upSecBtn);
+
+        var downSecBtn = document.createElement("button");
+        downSecBtn.type = "button";
+        downSecBtn.className = "btn-mini";
+        downSecBtn.title = "Move section down";
+        downSecBtn.textContent = "↓";
+        downSecBtn.disabled = secIdx === state.sections.length - 1;
+        downSecBtn.addEventListener("click", function () { moveInArray(state.sections, sec, 1); });
+        secActions.appendChild(downSecBtn);
+
         var delSecBtn = document.createElement("button");
         delSecBtn.type = "button";
         delSecBtn.className = "btn-mini danger";
-        delSecBtn.style.marginLeft = "auto";
         delSecBtn.textContent = "delete section";
         delSecBtn.addEventListener("click", function () { deleteSection(sec); });
-        summary.appendChild(delSecBtn);
+        secActions.appendChild(delSecBtn);
+
+        summary.appendChild(secActions);
       }
 
       // The section's description — editable right where it's shown, no
@@ -545,6 +583,25 @@
     actions.appendChild(sel);
 
     if (editing) {
+      var itIdx = parentArray.indexOf(it);
+      var upBtn = document.createElement("button");
+      upBtn.type = "button";
+      upBtn.className = "btn-mini";
+      upBtn.title = "Move up";
+      upBtn.textContent = "↑";
+      upBtn.disabled = itIdx === 0;
+      upBtn.addEventListener("click", function () { moveInArray(parentArray, it, -1); });
+      actions.appendChild(upBtn);
+
+      var downBtn = document.createElement("button");
+      downBtn.type = "button";
+      downBtn.className = "btn-mini";
+      downBtn.title = "Move down";
+      downBtn.textContent = "↓";
+      downBtn.disabled = itIdx === parentArray.length - 1;
+      downBtn.addEventListener("click", function () { moveInArray(parentArray, it, 1); });
+      actions.appendChild(downBtn);
+
       var addSubBtn = document.createElement("button");
       addSubBtn.type = "button";
       addSubBtn.className = "btn-mini";
