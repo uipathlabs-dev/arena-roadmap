@@ -53,7 +53,7 @@
           "id": "lp-content-hub",
           "name": "Content Hub",
           "status": "live",
-          "desc": "Find all GTM content.",
+          "desc": "Home for all GTM content. Upload fiels, share, and understand what is behind it",
           "children": [
             {
               "id": "lp-library",
