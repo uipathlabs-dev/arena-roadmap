@@ -29,7 +29,7 @@
         },
         {
           "id": "lp-ae",
-          "name": "Next Best Step",
+          "name": "Next Best Action",
           "status": "backlog",
           "desc": "Levrage the data we have from Salesforce and other integrations to monitor, suggest actions for each role",
           "children": [
