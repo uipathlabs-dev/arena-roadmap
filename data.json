@@ -25,7 +25,8 @@
           "name": "Landing page",
           "status": "plan",
           "desc": "Persona-based experience. Scope to be defined based on which products / feature flags are released.",
-          "children": []
+          "children": [],
+          "eta": "2026-08-31"
         },
         {
           "id": "lp-ae",
@@ -137,7 +138,8 @@
               "name": "Day 1",
               "status": "prog",
               "desc": "Quarter-start view: where the number stands from day one.",
-              "children": []
+              "children": [],
+              "eta": "2026-08-21"
             },
             {
               "id": "rev-arrgb",
@@ -153,7 +155,8 @@
               "desc": "A feature of the Dashboard (not a standalone page): AI-generated briefing for leadership.",
               "children": []
             }
-          ]
+          ],
+          "eta": "2026-08-21"
         },
         {
           "id": "rev-forecast",
