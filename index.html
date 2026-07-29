@@ -28,7 +28,10 @@
 
   .tag { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); border-radius: 2px; padding: 1px 7px; }
 
+  .admin-bar { display: flex; justify-content: flex-end; padding-top: 12px; margin-bottom: 16px; }
+
   .toolbar { position: sticky; top: 0; z-index: 10; background: var(--paper); display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 0; margin-bottom: 24px; border-bottom: 1px solid var(--line); font-size: 13px; }
+  #adminPanel[hidden] { display: none; }
   .toolbar .hint { color: var(--muted); flex: 1 1 240px; min-width: 200px; }
   .toolbar button { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; border: 1px solid var(--ink); background: var(--card); color: var(--ink); padding: 7px 14px; border-radius: 2px; }
   .toolbar button.primary { background: var(--ink); color: #fff; }
@@ -149,7 +152,11 @@
     <div class="foundation" id="foundation" hidden></div>
   </header>
 
-  <div class="toolbar">
+  <div class="admin-bar">
+    <button id="adminBtn" type="button" class="btn-mini">Admin</button>
+  </div>
+
+  <div class="toolbar" id="adminPanel" hidden>
     <span class="hint" id="hint">Read-only view. Click <b>Enable editing</b> and paste your GitHub token to make changes.</span>
     <span id="saveState"></span>
     <button id="editBtn" type="button">Enable editing</button>
@@ -842,6 +849,15 @@
     render();
   }
 
+  $("adminBtn").addEventListener("click", function () {
+    var panel = $("adminPanel");
+    if (panel.hidden) {
+      panel.hidden = false;
+      if (!token()) openTokenDialog();
+    } else {
+      panel.hidden = true;
+    }
+  });
   $("editBtn").addEventListener("click", function () {
     if (token()) setEditing(true); else openTokenDialog();
   });
