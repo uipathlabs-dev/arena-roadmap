@@ -53,20 +53,20 @@
           "id": "lp-content-hub",
           "name": "Content Hub",
           "status": "live",
-          "desc": "The working core: organize, govern, and find all GTM content.",
+          "desc": "Find all GTM content.",
           "children": [
             {
               "id": "lp-library",
               "name": "Content Library",
               "status": "live",
-              "desc": "Upload and classify documents and links; approval workflow to publish.",
+              "desc": "Upload and classify documents and links; gate what is uploaded so we have meanigful content",
               "children": []
             },
             {
               "id": "lp-spaces",
               "name": "Spaces",
               "status": "live",
-              "desc": "Curated hub pages built with a visual editor; public or restricted.",
+              "desc": "Curated hub pages built with easy to use visual editor; public or restricted.",
               "children": []
             },
             {
