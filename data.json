@@ -29,22 +29,22 @@
         },
         {
           "id": "lp-ae",
-          "name": "Workspace",
+          "name": "Next Best Step",
           "status": "backlog",
-          "desc": "Seller home — my deals, my territory, my tasks. Moved from Execution; folds into the Launchpad experience.",
+          "desc": "Levrage the data we have from Salesforce and other integrations to monitor, suggest actions for each role",
           "children": [
             {
               "id": "item-veqto6",
               "name": "AE Workspace",
               "status": "backlog",
-              "desc": "Seller home — my deals, my territory, my tasks. Moved from Execution; folds into the Launchpad experience.",
+              "desc": "Seller home — my deals, my territory, my tasks. ",
               "children": []
             },
             {
               "id": "item-jvqczy",
               "name": "Manager Workspace",
               "status": "backlog",
-              "desc": "Team rollups, rep performance, coaching. Moved from Execution; folds into the Launchpad experience.",
+              "desc": "Team rollups, rep performance, coaching. ",
               "children": []
             }
           ]
