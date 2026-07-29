@@ -62,27 +62,34 @@
   @media (prefers-reduced-motion: reduce) { .chev { transition: none; } }
   summary .sp { font-size: 12.5px; color: var(--muted); flex: 1 1 100%; margin-left: 19px; }
 
+  .section-title-label { font-size: 16.5px; font-weight: 700; letter-spacing: -.01em; }
   input.section-title-input {
     font: inherit; font-weight: 700; font-size: 16.5px; letter-spacing: -.01em; color: var(--ink);
     border: 1px solid transparent; background: transparent; padding: 2px 6px; border-radius: 3px; min-width: 140px;
   }
-  input.section-title-input:not(:disabled):hover, input.section-title-input:not(:disabled):focus { border-color: var(--line); background: var(--paper); }
-  input.section-title-input:disabled { cursor: default; }
+  input.section-title-input:hover, input.section-title-input:focus { border-color: var(--line); background: var(--paper); }
 
+  textarea.sp-input {
+    border: 1px solid transparent; background: transparent; padding: 2px 4px; border-radius: 3px;
+    resize: vertical; min-height: 18px; font-family: var(--sans);
+  }
+  textarea.sp-input:hover, textarea.sp-input:focus { border-color: var(--line); background: var(--card); }
+  textarea.sp-input::placeholder { color: var(--branch); }
+
+  .name-label { font-size: 14.5px; font-weight: 600; }
   input.name-input {
     font: inherit; font-weight: 600; font-size: 14.5px; color: var(--ink);
     border: 1px solid transparent; background: transparent; padding: 2px 4px; border-radius: 3px; min-width: 110px;
   }
-  input.name-input:not(:disabled):hover, input.name-input:not(:disabled):focus { border-color: var(--line); background: var(--paper); }
-  input.name-input:disabled { cursor: default; }
+  input.name-input:hover, input.name-input:focus { border-color: var(--line); background: var(--paper); }
 
+  .node .purpose { font-size: 12.5px; color: var(--muted); margin-top: 1px; max-width: 70ch; display: block; }
   textarea.desc-input {
-    width: 100%; font-family: var(--sans); font-size: 12.5px; color: var(--muted);
+    width: 100%; font-family: var(--sans); font-size: 12.5px; color: var(--ink);
     border: 1px solid transparent; background: transparent; padding: 2px 4px; margin-top: 1px;
     resize: vertical; min-height: 20px; line-height: 1.45; max-width: 70ch; display: block;
   }
-  textarea.desc-input:not(:disabled):hover, textarea.desc-input:not(:disabled):focus { border-color: var(--line); background: var(--paper); color: var(--ink); }
-  textarea.desc-input:disabled { cursor: default; }
+  textarea.desc-input:hover, textarea.desc-input:focus { border-color: var(--line); background: var(--paper); }
   textarea.desc-input::placeholder { color: var(--branch); }
 
   .badge-slot:empty { display: none; }
@@ -105,7 +112,8 @@
   .sf label { display: block; font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
   .sf textarea { width: 100%; border: none; background: transparent; font-family: var(--sans); font-size: 13px; color: var(--ink); resize: vertical; min-height: 40px; line-height: 1.45; }
   .sf textarea::placeholder { color: var(--branch); }
-  .sf textarea:disabled { color: var(--muted); }
+  .sf-value { font-size: 13px; color: var(--ink); line-height: 1.45; white-space: pre-wrap; }
+  .sf-value.empty { color: var(--branch); font-style: italic; }
 
   .tree, .tree ul { list-style: none; margin: 0; padding: 0; }
   .tree { padding: 8px 0 4px 10px; }
@@ -353,18 +361,24 @@
       chev.className = "chev";
       summary.appendChild(chev);
 
-      var titleInput = document.createElement("input");
-      titleInput.type = "text";
-      titleInput.id = "sectitle-" + sec.id;
-      titleInput.className = "section-title-input";
-      titleInput.value = sec.name;
-      titleInput.disabled = !editing;
-      titleInput.addEventListener("input", function () {
-        sec.name = titleInput.value;
-        refreshNodeBadge(summary, sec, "section");
-        refreshDirtyUi();
-      });
-      summary.appendChild(titleInput);
+      var titleEl;
+      if (editing) {
+        titleEl = document.createElement("input");
+        titleEl.type = "text";
+        titleEl.className = "section-title-input";
+        titleEl.value = sec.name;
+        titleEl.addEventListener("input", function () {
+          sec.name = titleEl.value;
+          refreshNodeBadge(summary, sec, "section");
+          refreshDirtyUi();
+        });
+      } else {
+        titleEl = document.createElement("span");
+        titleEl.className = "section-title-label";
+        titleEl.textContent = sec.name;
+      }
+      titleEl.id = "sectitle-" + sec.id;
+      summary.appendChild(titleEl);
 
       var secBadge = document.createElement("span");
       secBadge.className = "badge-slot";
@@ -387,33 +401,54 @@
         summary.appendChild(delSecBtn);
       }
 
-      var spPreview = document.createElement("span");
-      spPreview.className = "sp";
-      spPreview.textContent = sec.purpose || "";
-      summary.appendChild(spPreview);
+      // The section's description — editable right where it's shown, no
+      // separate duplicate field.
+      var descEl;
+      if (editing) {
+        descEl = document.createElement("textarea");
+        descEl.className = "sp sp-input";
+        descEl.rows = 1;
+        descEl.placeholder = "Section description…";
+        descEl.value = sec.purpose || "";
+        descEl.addEventListener("input", function () {
+          sec.purpose = descEl.value;
+          refreshNodeBadge(summary, sec, "section");
+          refreshDirtyUi();
+        });
+      } else {
+        descEl = document.createElement("span");
+        descEl.className = "sp";
+        descEl.textContent = sec.purpose || "";
+      }
+      summary.appendChild(descEl);
 
       det.appendChild(summary);
 
       var fields = document.createElement("div");
       fields.className = "section-fields";
-      [["purpose", "Section purpose"], ["stakeholders", "Stakeholders"], ["audience", "Target audience"]].forEach(function (pair) {
+      [["stakeholders", "Stakeholders"], ["audience", "Target audience"]].forEach(function (pair) {
         var key = pair[0], label = pair[1];
         var box = document.createElement("div");
         box.className = "sf";
         var lab = document.createElement("label");
         lab.textContent = label;
-        var ta = document.createElement("textarea");
-        ta.value = sec[key] || "";
-        ta.placeholder = editing ? "Type here…" : "—";
-        ta.disabled = !editing;
-        ta.addEventListener("input", function () {
-          sec[key] = ta.value;
-          if (key === "purpose") spPreview.textContent = ta.value;
-          refreshNodeBadge(summary, sec, "section");
-          refreshDirtyUi();
-        });
         box.appendChild(lab);
-        box.appendChild(ta);
+        if (editing) {
+          var ta = document.createElement("textarea");
+          ta.value = sec[key] || "";
+          ta.placeholder = "Type here…";
+          ta.addEventListener("input", function () {
+            sec[key] = ta.value;
+            refreshNodeBadge(summary, sec, "section");
+            refreshDirtyUi();
+          });
+          box.appendChild(ta);
+        } else {
+          var val = document.createElement("div");
+          val.className = "sf-value" + (sec[key] ? "" : " empty");
+          val.textContent = sec[key] || "—";
+          box.appendChild(val);
+        }
         fields.appendChild(box);
       });
       det.appendChild(fields);
@@ -465,18 +500,24 @@
     var nh = document.createElement("span");
     nh.className = "nh";
 
-    var nameInput = document.createElement("input");
-    nameInput.type = "text";
-    nameInput.id = "itemname-" + it.id;
-    nameInput.className = "name-input";
-    nameInput.value = it.name;
-    nameInput.disabled = !editing;
-    nameInput.addEventListener("input", function () {
-      it.name = nameInput.value;
-      refreshNodeBadge(node, it, "item");
-      refreshDirtyUi();
-    });
-    nh.appendChild(nameInput);
+    var nameEl;
+    if (editing) {
+      nameEl = document.createElement("input");
+      nameEl.type = "text";
+      nameEl.className = "name-input";
+      nameEl.value = it.name;
+      nameEl.addEventListener("input", function () {
+        it.name = nameEl.value;
+        refreshNodeBadge(node, it, "item");
+        refreshDirtyUi();
+      });
+    } else {
+      nameEl = document.createElement("span");
+      nameEl.className = "name-label";
+      nameEl.textContent = it.name;
+    }
+    nameEl.id = "itemname-" + it.id;
+    nh.appendChild(nameEl);
 
     var badge = document.createElement("span");
     badge.className = "badge-slot";
@@ -523,18 +564,24 @@
     nh.appendChild(actions);
     node.appendChild(nh);
 
-    var descArea = document.createElement("textarea");
-    descArea.className = "desc-input";
-    descArea.rows = 1;
-    descArea.placeholder = editing ? "Description…" : "";
-    descArea.value = it.desc || "";
-    descArea.disabled = !editing;
-    descArea.addEventListener("input", function () {
-      it.desc = descArea.value;
-      refreshNodeBadge(node, it, "item");
-      refreshDirtyUi();
-    });
-    node.appendChild(descArea);
+    if (editing) {
+      var descArea = document.createElement("textarea");
+      descArea.className = "desc-input";
+      descArea.rows = 1;
+      descArea.placeholder = "Description…";
+      descArea.value = it.desc || "";
+      descArea.addEventListener("input", function () {
+        it.desc = descArea.value;
+        refreshNodeBadge(node, it, "item");
+        refreshDirtyUi();
+      });
+      node.appendChild(descArea);
+    } else if (it.desc) {
+      var descLabel = document.createElement("span");
+      descLabel.className = "purpose";
+      descLabel.textContent = it.desc;
+      node.appendChild(descLabel);
+    }
 
     li.appendChild(node);
 
