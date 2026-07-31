@@ -251,7 +251,17 @@
           "name": "Intelligence",
           "status": "prog",
           "desc": "Account-scoped chat and on-page chat widgets.",
-          "children": []
+          "children": [
+            {
+              "id": "item-54dvyw",
+              "name": "Conversational Agent on SF Data",
+              "status": "prog",
+              "desc": "A conversational Salesforce agent that allows users to query data and perform a limited set of approved updates using their own logged-in credentials.",
+              "eta": "2026-09-14",
+              "children": []
+            }
+          ],
+          "eta": "2026-09-14"
         },
         {
           "id": "item-h5eaeg",
