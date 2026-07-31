@@ -201,44 +201,6 @@
       ]
     },
     {
-      "id": "intelligence",
-      "name": "Knowledge Hub",
-      "tag": "abstract layer",
-      "purpose": "Content generator based on all data uploaded in Arena. First phase to focus on Content Hub, then implement and abstract solution to works on top the entire Arena app and data",
-      "stakeholders": "JR, Alex Statie, Sabin & Leo",
-      "audience": "All app users",
-      "items": [
-        {
-          "id": "ik-kb",
-          "name": "Knowledge Base",
-          "status": "live",
-          "desc": "Curated records — pain points, proof points, quotes, win-wires — reviewed by humans.",
-          "children": []
-        },
-        {
-          "id": "ik-gen",
-          "name": "Content Generation",
-          "status": "live",
-          "desc": "Generate emails, battle cards, and narratives. Sync with what is already used in Arena for accounts.",
-          "children": []
-        },
-        {
-          "id": "ik-ci",
-          "name": "Competitive Intelligence",
-          "status": "live",
-          "desc": "Competitor profiles and battle cards with fact-check QA.",
-          "children": []
-        },
-        {
-          "id": "item-w75vhi",
-          "name": "Abstract to Arena app",
-          "status": "backlog",
-          "desc": "Integrate the logic and agents so it covers the entire Arena data",
-          "children": []
-        }
-      ]
-    },
-    {
       "id": "section-2v2erj",
       "name": "Learning Hub",
       "tag": null,
