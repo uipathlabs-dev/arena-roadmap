@@ -401,6 +401,14 @@
               "children": []
             }
           ]
+        },
+        {
+          "id": "item-rxb40j",
+          "name": "Knowledge",
+          "status": "live",
+          "desc": "Content generator based on all data uploaded in Arena. First phase to focus on Content Hub, then implement and abstract solution to works on top the entire Arena app and data",
+          "eta": "",
+          "children": []
         }
       ],
       "eta": "2026-09-14"
