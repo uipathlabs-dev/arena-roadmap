@@ -207,7 +207,8 @@
           "eta": "",
           "children": []
         }
-      ]
+      ],
+      "status": "live"
     },
     {
       "id": "section-2v2erj",
@@ -217,7 +218,8 @@
       "stakeholders": "JR, Alex Statie",
       "audience": "All GTM app users",
       "eta": "",
-      "items": []
+      "items": [],
+      "status": "backlog"
     },
     {
       "id": "ai-agent",
@@ -415,7 +417,8 @@
           ]
         }
       ],
-      "eta": "2026-09-14"
+      "eta": "2026-09-14",
+      "status": "prog"
     },
     {
       "id": "admin",
@@ -524,7 +527,8 @@
           "children": []
         }
       ],
-      "eta": "2026-09-14"
+      "eta": "2026-09-14",
+      "status": "prog"
     },
     {
       "id": "backlog",
@@ -583,7 +587,8 @@
           "desc": "Migrate the Use Case data coming from the field and map it to the existing content we have in Content Hub",
           "children": []
         }
-      ]
+      ],
+      "status": "backlog"
     }
   ]
 }
