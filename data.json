@@ -362,7 +362,7 @@
               "id": "item-0m8egm",
               "name": "Clari CoPilot",
               "status": "plan",
-              "desc": "",
+              "desc": "We pull recorded customer calls (Zoom/Teams/Meet) with participants, transcripts, and topics, and generate AI-written structured summaries of each call. Surfaced as call history and summaries on accounts and opportunities, giving teams searchable context on every customer conversation.",
               "eta": "2026-09-30",
               "children": []
             },
