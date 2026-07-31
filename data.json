@@ -243,8 +243,8 @@
       "name": "Data & Intelligence Hub",
       "tag": null,
       "purpose": "Slimmed per review: conversational AI only using Tribble AI",
-      "stakeholders": "",
-      "audience": "",
+      "stakeholders": "JR, Alex Statis, Sabin & Leo",
+      "audience": "All app users",
       "items": [
         {
           "id": "ai-chat",
@@ -360,7 +360,8 @@
             }
           ]
         }
-      ]
+      ],
+      "eta": "2026-09-14"
     },
     {
       "id": "admin",
