@@ -57,7 +57,7 @@
               "id": "rev-arrgb",
               "name": "ARR Details",
               "status": "prog",
-              "desc": "A sheet-style breakdown of Annual Recurring Revenue across territories and segments",
+              "desc": "A sheet-style breakdown of Annual Recurring Revenue across territories and segments.",
               "children": [],
               "eta": "2026-09-14"
             },
@@ -65,7 +65,7 @@
               "id": "item-9teglo",
               "name": "Gameboard",
               "status": "prog",
-              "desc": "",
+              "desc": "Account health and whitespace analysis in three sub-views: product Penetration depth within accounts, a strategic account Matrix, and Pen-Traction combining penetration with recent velocity.",
               "eta": "2026-09-14",
               "children": []
             },
