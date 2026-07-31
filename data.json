@@ -18,7 +18,7 @@
       "tag": null,
       "purpose": "The personalized, role-aware home screen — a daily briefing on what needs attention now. KPI cards show Pipeline, Forecast call vs. target with attainment, and training progress; AI-driven panels surface at-risk deals, account plan health, coaching signals (for managers), and high-priority tasks.",
       "stakeholders": "JR, Alex Statie, Sabin & Leo",
-      "audience": "All logged-in users",
+      "audience": "All app users",
       "items": [
         {
           "id": "item-fpw5ic",
@@ -205,8 +205,8 @@
       "name": "Knowledge Hub",
       "tag": "abstract layer",
       "purpose": "Content generator based on all data uploaded in Arena. First phase to focus on Content Hub, then implement and abstract solution to works on top the entire Arena app and data",
-      "stakeholders": "",
-      "audience": "",
+      "stakeholders": "JR, Alex Statie, Sabin & Leo",
+      "audience": "All app users",
       "items": [
         {
           "id": "ik-kb",
