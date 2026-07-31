@@ -322,7 +322,7 @@
               "id": "item-4g6b1l",
               "name": "Salesforce",
               "status": "prog",
-              "desc": "",
+              "desc": "Our CRM backbone, with two connections: a dedicated ingestion pipeline that continuously pulls opportunities, accounts, contracts, support cases, users, and the full sales territory hierarchy; and per-user OAuth for secure write-back, so select field updates made in the app are written to Salesforce under the user's own identity and permissions. The ingested data drives virtually everything: the Forecast module (Overview, Build, Bridge), the Opportunities workspace, account views, and territory-based filtering and access control throughout the app.",
               "eta": "2026-09-14",
               "children": []
             },
