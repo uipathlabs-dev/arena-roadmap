@@ -240,7 +240,7 @@
     },
     {
       "id": "ai-agent",
-      "name": "Data & Intelligence",
+      "name": "Data & Intelligence Layer",
       "tag": null,
       "purpose": "Slimmed per review: conversational AI only using Tribble AI",
       "stakeholders": "JR, Alex Statis, Sabin & Leo",
