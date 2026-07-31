@@ -338,7 +338,7 @@
               "id": "item-neqkz7",
               "name": "Snowflake",
               "status": "prog",
-              "desc": "",
+              "desc": "We pull utilization telemetry (users, robots, consumables, deployment types) and agentic/AI adoption signals (agent runs, Maestro runs, trends) from Snowflake. This data is surfaced in the Utilization and Agentic Signal columns on Ruby Accounts and in Account Hub's product utilization views, showing how deeply each customer is actually using the platform.",
               "eta": "2026-09-14",
               "children": []
             },
