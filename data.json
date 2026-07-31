@@ -330,7 +330,7 @@
               "id": "item-827aby",
               "name": "EDW",
               "status": "prog",
-              "desc": "",
+              "desc": "Our enterprise data warehouse feed. We pull finance-grade data that goes beyond CRM: ARR history, ultimate-parent account rollups, and curated account/opportunity records. This is what powers ARR figures on the Dashboard and Ruby Accounts, customer-360 views in Account Hub, and any analysis that needs official revenue numbers rather than pipeline estimates. Refreshed daily.",
               "eta": "2026-09-14",
               "children": []
             },
