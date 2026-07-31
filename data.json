@@ -408,7 +408,40 @@
           "status": "live",
           "desc": "Content generator based on all data uploaded in Arena. First phase to focus on Content Hub, then implement and abstract solution to works on top the entire Arena app and data",
           "eta": "",
-          "children": []
+          "children": [
+            {
+              "id": "item-k0tyvo",
+              "name": "Knowledge Base",
+              "status": "live",
+              "desc": "",
+              "eta": "",
+              "children": []
+            },
+            {
+              "id": "item-0r6pi7",
+              "name": "Content Generation",
+              "status": "live",
+              "desc": "",
+              "eta": "",
+              "children": []
+            },
+            {
+              "id": "item-dcpo7y",
+              "name": "Competitive Intelligence",
+              "status": "live",
+              "desc": "",
+              "eta": "",
+              "children": []
+            },
+            {
+              "id": "item-oq4ls1",
+              "name": "Abstract to Arena App",
+              "status": "plan",
+              "desc": "",
+              "eta": "",
+              "children": []
+            }
+          ]
         }
       ],
       "eta": "2026-09-14"
