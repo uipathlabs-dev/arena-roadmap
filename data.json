@@ -202,7 +202,7 @@
     },
     {
       "id": "intelligence",
-      "name": "Intelligence & Knowledge",
+      "name": "Knowledge Hub",
       "tag": "abstract layer",
       "purpose": "Content generator based on all data uploaded in Arena. First phase to focus on Content Hub, then implement and abstract solution to works on top the entire Arena app and data",
       "stakeholders": "",
@@ -240,7 +240,7 @@
     },
     {
       "id": "ai-agent",
-      "name": "Intelligence Hub",
+      "name": "Data & Intelligence Hub",
       "tag": null,
       "purpose": "Slimmed per review: conversational AI only using Tribble AI",
       "stakeholders": "",
@@ -248,16 +248,97 @@
       "items": [
         {
           "id": "ai-chat",
-          "name": "Conversational AI",
+          "name": "Intelligence",
           "status": "prog",
           "desc": "Account-scoped chat and on-page chat widgets.",
           "children": []
+        },
+        {
+          "id": "item-h5eaeg",
+          "name": "Integrations",
+          "status": "prog",
+          "desc": "",
+          "eta": "2026-09-14",
+          "children": [
+            {
+              "id": "item-4g6b1l",
+              "name": "Salesforce",
+              "status": "prog",
+              "desc": "",
+              "eta": "2026-09-14",
+              "children": []
+            },
+            {
+              "id": "item-827aby",
+              "name": "EDW",
+              "status": "prog",
+              "desc": "",
+              "eta": "2026-09-14",
+              "children": []
+            },
+            {
+              "id": "item-neqkz7",
+              "name": "Snowflake",
+              "status": "prog",
+              "desc": "",
+              "eta": "2026-09-14",
+              "children": []
+            },
+            {
+              "id": "item-i79wvf",
+              "name": "Exchange",
+              "status": "plan",
+              "desc": "",
+              "eta": "2026-09-30",
+              "children": []
+            },
+            {
+              "id": "item-7xdcxj",
+              "name": "Tribble",
+              "status": "prog",
+              "desc": "",
+              "eta": "2026-09-14",
+              "children": []
+            },
+            {
+              "id": "item-0m8egm",
+              "name": "Clari CoPilot",
+              "status": "plan",
+              "desc": "",
+              "eta": "2026-09-30",
+              "children": []
+            },
+            {
+              "id": "item-s7ibna",
+              "name": "Highspot",
+              "status": "live",
+              "desc": "",
+              "eta": "",
+              "children": []
+            },
+            {
+              "id": "item-kub7m1",
+              "name": "FDE App",
+              "status": "prog",
+              "desc": "",
+              "eta": "2026-09-14",
+              "children": []
+            },
+            {
+              "id": "item-jwvaba",
+              "name": "Slack",
+              "status": "plan",
+              "desc": "",
+              "eta": "2026-09-30",
+              "children": []
+            }
+          ]
         }
       ]
     },
     {
       "id": "admin",
-      "name": "Admin",
+      "name": "Admin Hub",
       "tag": null,
       "purpose": "Platform operations — access, data management, forecast configuration, integrations.",
       "stakeholders": "",
