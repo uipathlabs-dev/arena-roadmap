@@ -49,22 +49,31 @@
               "id": "rev-day1",
               "name": "Day 1",
               "status": "prog",
-              "desc": "Quarter-start view: where the number stands from day one.",
+              "desc": "A single-page executive readout of the quarter combining forecast KPIs, top deals and churn, rotating analytical views (forecast breakdown, area and vertical performance, linearity, Ruby risk).",
               "children": [],
               "eta": "2026-08-21"
             },
             {
               "id": "rev-arrgb",
-              "name": "ARR Gameboard",
+              "name": "ARR Details",
               "status": "prog",
               "desc": "ARR details and vertical penetration gameboard.",
               "children": []
             },
             {
-              "id": "rev-exec",
-              "name": "Executive Summary",
+              "id": "item-9teglo",
+              "name": "Gameboard",
               "status": "prog",
-              "desc": "A feature of the Dashboard (not a standalone page): AI-generated briefing for leadership.",
+              "desc": "",
+              "eta": "",
+              "children": []
+            },
+            {
+              "id": "item-4gib2p",
+              "name": "Weekly Cadence Dash",
+              "status": "backlog",
+              "desc": "",
+              "eta": "",
               "children": []
             }
           ],
@@ -74,34 +83,34 @@
           "id": "rev-forecast",
           "name": "Forecast",
           "status": "prog",
-          "desc": "Territory rollups and manual call adjustments. The single forecasting home in Arena.",
+          "desc": "The sales forecasting hub for the current quarter and beyond: it combines live CRM pipeline with historical patterns and point-in-time snapshots so leaders can call a number, build it bottom-up, judge its risk against history, and explain how it changed week over week.",
           "children": [
             {
               "id": "rev-f-overview",
               "name": "Overview",
               "status": "prog",
-              "desc": "Current-quarter picture: commit, probable, upside, pipeline.",
+              "desc": "The core forecast rollup: a hierarchical territory tree showing pipeline and the calculated \"Math Forecast,\" toggle-able between iARR and Subscription TCV and between Sales and Finance views, with drill-in by territory and a workspace panel for cell-level deal inspection and manual forecast adjustments.",
               "children": []
             },
             {
               "id": "rev-f-build",
               "name": "Build",
               "status": "prog",
-              "desc": "Guided forecast construction.",
+              "desc": "A guided, bottom-up forecast constructor that buckets the quarter into Large Deals, Flow, Large/Small DSC, and Flat Renewals and shows account-level deal tables per bucket — with segment charts, per-deal vs. per-account toggle - with per deal/category adjustments input at AVP and SVP level.",
               "children": []
             },
             {
               "id": "rev-f-linearity",
               "name": "Linearity",
               "status": "prog",
-              "desc": "Close-date distribution across the quarter; risk clustering.",
+              "desc": "Historical quarter-progression curves (1/2/3-year averages) overlaid on the current quarter, with a linearity estimates matrix, run-rate and risk calculations, threshold-based deal assessments, a hierarchical territory filter, and Quarter / Semi-Annual / Annual scopes — answering \"given where we are on day N, are we on pace?\"",
               "children": []
             },
             {
               "id": "rev-f-bridge",
               "name": "Bridge",
               "status": "prog",
-              "desc": "Bridge between forecast methodologies and periods.",
+              "desc": "Snapshot-to-snapshot or snapshot to live comparison explaining forecast or pipeline movement: waterfall charts of net change decomposed into categories deals between any two snapshot dates, clickable down to the specific deals behind each bar, in either bucket-based or deal-movement views.",
               "children": []
             }
           ]
