@@ -36,8 +36,8 @@
       "name": "Revenue Hub",
       "tag": null,
       "purpose": "The numbers side — forecast, pipeline, and account truth for the whole org",
-      "stakeholders": "",
-      "audience": "",
+      "stakeholders": "Sabin & Leo",
+      "audience": "All GTM teams",
       "items": [
         {
           "id": "rev-dashboard",
