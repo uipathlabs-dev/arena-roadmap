@@ -291,6 +291,14 @@
               "desc": "Generates an executive briefing that summarizes performance against quota, current forecast position, pipeline composition, key deal movements, and emerging risks. It highlights the most important gaps, dependencies, and areas requiring leadership attention across the relevant territory or organization.",
               "eta": "2026-09-30",
               "children": []
+            },
+            {
+              "id": "item-am6vat",
+              "name": "Opportunity Insights",
+              "status": "plan",
+              "desc": "Generates opportunity-level insights and scoring by analyzing Salesforce fields, historical deal patterns, and recent activity to estimate the likelihood of each deal closing and closing on time. It highlights the signals driving each score, identifies potential risks or gaps, and surfaces the opportunities that require attention.",
+              "eta": "2026-09-30",
+              "children": []
             }
           ],
           "eta": "2026-09-14"
