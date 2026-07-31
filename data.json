@@ -386,7 +386,7 @@
               "id": "item-jwvaba",
               "name": "Slack",
               "status": "plan",
-              "desc": "",
+              "desc": "We sync account-linked Slack channels and their recent messages, matching channels to Salesforce accounts, and surface that discussion in account views. The integration also works outbound: users can send Slack messages directly from the app, and the app delivers notifications (alerts, task reminders, updates) straight to users in Slack.",
               "eta": "2026-09-30",
               "children": []
             }
