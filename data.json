@@ -317,6 +317,38 @@
               "desc": "Generates account-level insights across Account Plan, Know Your Customer, Consumption Plan, and Account Data by combining information captured within the platform, Salesforce records, and recent customer activity from emails, meetings, and call recordings. It summarizes account health, engagement, product adoption, pipeline, risks, and stakeholder coverage, then recommends the next best action for each role on the account team.",
               "eta": "2026-09-30",
               "children": []
+            },
+            {
+              "id": "item-0g2xlv",
+              "name": "Knowledge Base",
+              "status": "plan",
+              "desc": "",
+              "eta": "",
+              "children": []
+            },
+            {
+              "id": "item-hfz8gw",
+              "name": "Content Generation",
+              "status": "plan",
+              "desc": "",
+              "eta": "",
+              "children": []
+            },
+            {
+              "id": "item-yvs1py",
+              "name": "Competitive Intelligence",
+              "status": "plan",
+              "desc": "",
+              "eta": "",
+              "children": []
+            },
+            {
+              "id": "item-vcjxpo",
+              "name": "Abstract to Arena app",
+              "status": "plan",
+              "desc": "",
+              "eta": "",
+              "children": []
             }
           ],
           "eta": "2026-09-14"
