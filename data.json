@@ -299,6 +299,14 @@
               "desc": "Generates opportunity-level insights and scoring by analyzing Salesforce fields, historical deal patterns, and recent activity to estimate the likelihood of each deal closing and closing on time. It highlights the signals driving each score, identifies potential risks or gaps, and surfaces the opportunities that require attention.",
               "eta": "2026-09-30",
               "children": []
+            },
+            {
+              "id": "item-6qw97a",
+              "name": "Account Insights",
+              "status": "plan",
+              "desc": "Generates account-level insights across Account Plan, Know Your Customer, Consumption Plan, and Account Data by combining information captured within the platform, Salesforce records, and recent customer activity from emails, meetings, and call recordings. It summarizes account health, engagement, product adoption, pipeline, risks, and stakeholder coverage, then recommends the next best action for each role on the account team.",
+              "eta": "2026-09-30",
+              "children": []
             }
           ],
           "eta": "2026-09-14"
