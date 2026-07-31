@@ -421,7 +421,7 @@
               "id": "item-0r6pi7",
               "name": "Content Generation",
               "status": "live",
-              "desc": "",
+              "desc": "Generate emails, battle cards, and narratives. Sync with what is already used in Arena for accounts.",
               "eta": "",
               "children": []
             },
