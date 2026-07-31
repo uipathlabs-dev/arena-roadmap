@@ -139,7 +139,7 @@
               "id": "rev-acc-overview",
               "name": "Accounts Overview",
               "status": "prog",
-              "desc": "Account list with filters; high-value tracking and churn.",
+              "desc": "A high-density account command center that classifies the customer base by pipeline health or account tier, with interactive summary cards showing count, ARR, and current/next-quarter pipeline for each segment. The main table brings everything known about an account into one row across collapsible column groups: ARR/ACV and renewal dates, territory and vertical, the full coverage team (AE, CSM, TAM, SE, partner) with activity levels, services delivery status, product-level ARR breakouts, utilization telemetry (users, robots, consumables), agentic/AI adoption signals, support cases, and forward pipeline — switchable between parent-account (strategic) and child-account (operational) grain. Dedicated tabs extend the view to CS/TAM Coverage, Services, Partners, and Global Accounts. Users can scope by a hierarchical territory filter, drill from any pipeline or ARR figure into the underlying deals, flag key accounts for Big Deal / Day 2 reviews. Accounts can be drilled-down into for the Account Hub view.",
               "children": [],
               "eta": "2026-09-14"
             },
