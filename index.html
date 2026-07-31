@@ -111,6 +111,7 @@
   .sf-row { display: flex; align-items: center; gap: 8px; }
 
   .eta-row { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+  summary > .eta-row { margin-top: 0; }
   .eta-cap { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
   .eta-label { font-size: 12.5px; color: var(--ink); }
   .eta-label b { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-right: 4px; }
@@ -522,6 +523,12 @@
       }
       summary.appendChild(secActions);
 
+      // ETA lives in the header (compact inline style, like items) so it's
+      // visible even while the section is collapsed — hidden entirely when
+      // empty and not editing.
+      var secEta = renderEta(sec, "section", summary, false);
+      if (secEta) summary.appendChild(secEta);
+
       // The section's description — editable right where it's shown, no
       // separate duplicate field.
       var descEl;
@@ -572,11 +579,6 @@
         }
         fields.appendChild(box);
       });
-
-      // ETA is hidden entirely when empty and not editing (unlike the two
-      // fields above, which always show a box with a "—" placeholder).
-      var secEta = renderEta(sec, "section", summary, true);
-      if (secEta) fields.appendChild(secEta);
       det.appendChild(fields);
 
       det.appendChild(renderTree(sec.items || []));
