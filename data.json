@@ -147,7 +147,7 @@
               "id": "rev-acc-hub",
               "name": "Account Hub",
               "status": "plan",
-              "desc": "Per-account drilldown: planning, activity, research, consumption.",
+              "desc": "The 360-degree single-account workspace: pick any customer and get everything the account team (AE, CSM, TAM, SE, PS/FDE) needs in one place. A persistent header shows ARR, geography, at-risk status, key-account tags, the assigned team, and a renewal countdown with the ARR at stake; tabs then organize the depth — Account Summary (health and key metrics at a glance), Account Data (open pipeline, TCV, product utilization, recent activity, support cases), Account Plan (strategy, interactive org charts, success plans, risk management), Consumption Plan (usage versus targets), Know Your Customer (firmographic and strategic research), and Self-Service reporting.",
               "children": [],
               "eta": "2026-09-30"
             }
