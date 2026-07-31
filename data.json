@@ -96,7 +96,7 @@
                   "id": "item-5wr1vt",
                   "name": "Services Bookings Tab",
                   "status": "backlog",
-                  "desc": "",
+                  "desc": "Include a Services Bookings tab in the current Overview, that replicates the existing build in Clari",
                   "eta": "",
                   "children": []
                 }
