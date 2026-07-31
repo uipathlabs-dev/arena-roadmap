@@ -397,7 +397,7 @@
     },
     {
       "id": "admin",
-      "name": "Admin Hub",
+      "name": "Admin",
       "tag": null,
       "purpose": "Platform operations — access, data management, forecast configuration, integrations.",
       "stakeholders": "All app admin users",
