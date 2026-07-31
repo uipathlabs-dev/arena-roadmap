@@ -673,9 +673,15 @@
       actions.appendChild(makeMiniBtn("delete", "Delete", function () { deleteItem(parentArray, it); }, { danger: true }));
     }
     nh.appendChild(actions);
+
+    // ETA lives in the header (compact row) so it's visible even while the
+    // item is collapsed — hidden entirely when empty and not editing.
+    var itEta = renderEta(it, "item", node, false);
+    if (itEta) nh.appendChild(itEta);
+
     node.appendChild(nh);
 
-    // Collapsed by default (compact); expands on click to reveal these.
+    // Collapsed by default (compact); expands on click to reveal this.
     var body = document.createElement("div");
     body.className = "item-body";
 
@@ -697,10 +703,6 @@
       descLabel.textContent = it.desc;
       body.appendChild(descLabel);
     }
-
-    // ETA is hidden entirely when empty and not editing.
-    var itEta = renderEta(it, "item", node, false);
-    if (itEta) body.appendChild(itEta);
 
     if (body.children.length) node.appendChild(body);
 
