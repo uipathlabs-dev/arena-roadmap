@@ -275,6 +275,22 @@
               "desc": "A Themes module that analyzes customer interactions across emails and call recordings, identifies recurring topics, concerns, and opportunities, and groups them into actionable themes. Each theme is linked to the relevant accounts, opportunities, and territories, enabling leaders to understand customer sentiment, emerging trends, and common blockers across their organization.",
               "eta": "2026-09-30",
               "children": []
+            },
+            {
+              "id": "item-5toj5j",
+              "name": "Support Cases Analysis",
+              "status": "plan",
+              "desc": "Analyzes customer support cases to identify recurring issues, trends, sentiment, and escalation risks, then consolidates the findings at account and territory levels to provide visibility into customer health and emerging support patterns.",
+              "eta": "2026-09-30",
+              "children": []
+            },
+            {
+              "id": "item-6b5hf9",
+              "name": "Executive Briefing Generator",
+              "status": "plan",
+              "desc": "Generates an executive briefing that summarizes performance against quota, current forecast position, pipeline composition, key deal movements, and emerging risks. It highlights the most important gaps, dependencies, and areas requiring leadership attention across the relevant territory or organization.",
+              "eta": "2026-09-30",
+              "children": []
             }
           ],
           "eta": "2026-09-14"
