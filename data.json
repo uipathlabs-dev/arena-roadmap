@@ -315,7 +315,7 @@
           "id": "item-h5eaeg",
           "name": "Integrations",
           "status": "prog",
-          "desc": "",
+          "desc": "A section to provide a centralized view of all platform integrations, outlining which systems are connected, how each integration is used, the data exchanged, and the capabilities it enables.",
           "eta": "2026-09-14",
           "children": [
             {
