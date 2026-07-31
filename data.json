@@ -259,6 +259,14 @@
               "desc": "A conversational Salesforce agent that allows users to query data and perform a limited set of approved updates using their own logged-in credentials.",
               "eta": "2026-09-14",
               "children": []
+            },
+            {
+              "id": "item-mnww51",
+              "name": "Conversational Agent on App Data",
+              "status": "backlog",
+              "desc": "A conversational Salesforce agent that allows users to query data and perform a limited set of approved updates using their own logged-in credentials.",
+              "eta": "",
+              "children": []
             }
           ],
           "eta": "2026-09-14"
