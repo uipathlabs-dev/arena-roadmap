@@ -378,7 +378,7 @@
               "id": "item-kub7m1",
               "name": "FDE App",
               "status": "prog",
-              "desc": "",
+              "desc": "We pull engagement scores, project milestones and blockers, and engineer utilization from the FDE Sentinel system. Surfaced in the FDE columns on Ruby Accounts and engagement-health views, showing where field engineers are deployed and how those engagements are progressing.",
               "eta": "2026-09-14",
               "children": []
             },
