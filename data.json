@@ -239,6 +239,16 @@
       ]
     },
     {
+      "id": "section-2v2erj",
+      "name": "Learning Hub",
+      "tag": null,
+      "purpose": "Training Repository, AI Role Plays, Self-Guided Training",
+      "stakeholders": "JR, Alex Statie",
+      "audience": "All GTM app users",
+      "eta": "",
+      "items": []
+    },
+    {
       "id": "ai-agent",
       "name": "Data & Intelligence Layer",
       "tag": null,
