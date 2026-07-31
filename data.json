@@ -73,7 +73,7 @@
               "id": "item-4gib2p",
               "name": "Weekly Cadence Dash",
               "status": "backlog",
-              "desc": "",
+              "desc": "A dynamic 13-week pipeline and forecast review dashboard that evolves throughout the quarter, with the weekly view adapting as the quarter moves from pipeline building to execution and close.",
               "eta": "",
               "children": []
             }
