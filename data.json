@@ -16,7 +16,7 @@
       "id": "launchpad",
       "name": "Launchpad",
       "tag": null,
-      "purpose": "The personalized, role-aware home screen - a daily briefing on what needs attention now. KPI cards show Pipeline, Forecast call vs. target with attainment, and training progress; AI-driven panels surface at-risk deals, account plan health, coaching signals (for managers), and high-priority tasks.",
+      "purpose": "The personalized, role-aware home screen — a daily briefing on what needs attention now. KPI cards show Pipeline, Forecast call vs. target with attainment, and training progress; AI-driven panels surface at-risk deals, account plan health, coaching signals (for managers), and high-priority tasks.",
       "stakeholders": "JR, Alex Statie, Sabin & Leo",
       "audience": "All app users",
       "items": [
@@ -35,7 +35,7 @@
       "id": "revenue",
       "name": "Revenue Hub",
       "tag": null,
-      "purpose": "A connected set of workspaces that takes you seamlessly from executive-level performance readouts down to the individual deal and account, calling and building the forecast, analyzing pipeline and quarter progression, flagging at-risk revenue, and managing account health and growth - all on shared data, territory scoping, and built-in AI insight.",
+      "purpose": "The numbers side — forecast, pipeline, and account truth for the whole org",
       "stakeholders": "Sabin & Leo",
       "audience": "All GTM teams",
       "items": [
@@ -91,7 +91,16 @@
               "name": "Overview",
               "status": "prog",
               "desc": "The core forecast rollup: a hierarchical territory tree showing pipeline and the calculated \"Math Forecast,\" toggle-able between iARR and Subscription TCV and between Sales and Finance views, with drill-in by territory and a workspace panel for cell-level deal inspection and manual forecast adjustments.",
-              "children": [],
+              "children": [
+                {
+                  "id": "item-5wr1vt",
+                  "name": "Services Bookings Tab",
+                  "status": "backlog",
+                  "desc": "",
+                  "eta": "",
+                  "children": []
+                }
+              ],
               "eta": "2026-09-14"
             },
             {
@@ -133,7 +142,7 @@
           "id": "rev-accounts",
           "name": "Accounts",
           "status": "prog",
-          "desc": "Everything account-related in one module: Overview gives a portfolio-wide view that flags risk, coverage, and usage across the entire customer base, while Account Hub drills into any single account view.",
+          "desc": "Account truth: list plus per-account deep dive.",
           "children": [
             {
               "id": "rev-acc-overview",
@@ -212,7 +221,7 @@
     },
     {
       "id": "ai-agent",
-      "name": "Data & Intelligence",
+      "name": "Data & Intelligence Layer",
       "tag": null,
       "purpose": "Slimmed per review: conversational AI only using Tribble AI",
       "stakeholders": "JR, Alex Statis, Sabin & Leo",
@@ -278,38 +287,6 @@
               "status": "plan",
               "desc": "Generates account-level insights across Account Plan, Know Your Customer, Consumption Plan, and Account Data by combining information captured within the platform, Salesforce records, and recent customer activity from emails, meetings, and call recordings. It summarizes account health, engagement, product adoption, pipeline, risks, and stakeholder coverage, then recommends the next best action for each role on the account team.",
               "eta": "2026-09-30",
-              "children": []
-            },
-            {
-              "id": "item-0g2xlv",
-              "name": "Knowledge Base",
-              "status": "live",
-              "desc": "Curated records — pain points, proof points, quotes, win-wires — reviewed by humans.",
-              "eta": "",
-              "children": []
-            },
-            {
-              "id": "item-hfz8gw",
-              "name": "Content Generation",
-              "status": "live",
-              "desc": "Generate emails, battle cards, and narratives. Sync with what is already used in Arena for accounts.",
-              "eta": "",
-              "children": []
-            },
-            {
-              "id": "item-yvs1py",
-              "name": "Competitive Intelligence",
-              "status": "live",
-              "desc": "Competitor profiles and battle cards with fact-check QA.",
-              "eta": "",
-              "children": []
-            },
-            {
-              "id": "item-vcjxpo",
-              "name": "Abstract to Arena app",
-              "status": "backlog",
-              "desc": "Integrate the logic and agents so it covers the entire Arena data",
-              "eta": "",
               "children": []
             }
           ],
@@ -392,6 +369,47 @@
               "status": "plan",
               "desc": "We sync account-linked Slack channels and their recent messages, matching channels to Salesforce accounts, and surface that discussion in account views. The integration also works outbound: users can send Slack messages directly from the app, and the app delivers notifications (alerts, task reminders, updates) straight to users in Slack.",
               "eta": "2026-09-30",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "item-rxb40j",
+          "name": "Knowledge",
+          "status": "live",
+          "desc": "Content generator based on all data uploaded in Arena. First phase to focus on Content Hub, then implement and abstract solution to works on top the entire Arena app and data",
+          "eta": "",
+          "children": [
+            {
+              "id": "item-k0tyvo",
+              "name": "Knowledge Base",
+              "status": "live",
+              "desc": "Curated records — pain points, proof points, quotes, win-wires — reviewed by humans.",
+              "eta": "",
+              "children": []
+            },
+            {
+              "id": "item-0r6pi7",
+              "name": "Content Generation",
+              "status": "live",
+              "desc": "Generate emails, battle cards, and narratives. Sync with what is already used in Arena for accounts.",
+              "eta": "",
+              "children": []
+            },
+            {
+              "id": "item-dcpo7y",
+              "name": "Competitive Intelligence",
+              "status": "live",
+              "desc": "Competitor profiles and battle cards with fact-check QA.",
+              "eta": "",
+              "children": []
+            },
+            {
+              "id": "item-oq4ls1",
+              "name": "Abstract to Arena App",
+              "status": "backlog",
+              "desc": "Integrate the logic and agents so it covers the entire Arena data",
+              "eta": "",
               "children": []
             }
           ]
@@ -510,7 +528,7 @@
     },
     {
       "id": "backlog",
-      "name": "General Backlog",
+      "name": "Backlog",
       "tag": null,
       "purpose": "Parked until the sections above land. Former Execution items now live here.",
       "stakeholders": "All app users",
