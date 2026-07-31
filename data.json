@@ -413,7 +413,7 @@
               "id": "item-k0tyvo",
               "name": "Knowledge Base",
               "status": "live",
-              "desc": "",
+              "desc": "Curated records — pain points, proof points, quotes, win-wires — reviewed by humans.",
               "eta": "",
               "children": []
             },
@@ -421,7 +421,7 @@
               "id": "item-0r6pi7",
               "name": "Content Generation",
               "status": "live",
-              "desc": "",
+              "desc": "Generate emails, battle cards, and narratives. Sync with what is already used in Arena for accounts.",
               "eta": "",
               "children": []
             },
@@ -429,15 +429,15 @@
               "id": "item-dcpo7y",
               "name": "Competitive Intelligence",
               "status": "live",
-              "desc": "",
+              "desc": "Competitor profiles and battle cards with fact-check QA.",
               "eta": "",
               "children": []
             },
             {
               "id": "item-oq4ls1",
               "name": "Abstract to Arena App",
-              "status": "plan",
-              "desc": "",
+              "status": "backlog",
+              "desc": "Integrate the logic and agents so it covers the entire Arena data",
               "eta": "",
               "children": []
             }
