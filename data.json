@@ -250,7 +250,7 @@
           "id": "ai-chat",
           "name": "Intelligence",
           "status": "prog",
-          "desc": "Account-scoped chat and on-page chat widgets.",
+          "desc": "A centralized section for AI-powered capabilities across the platform",
           "children": [
             {
               "id": "item-54dvyw",
