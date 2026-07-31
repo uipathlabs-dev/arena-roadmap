@@ -321,7 +321,7 @@
             {
               "id": "item-0g2xlv",
               "name": "Knowledge Base",
-              "status": "plan",
+              "status": "live",
               "desc": "",
               "eta": "",
               "children": []
@@ -329,7 +329,7 @@
             {
               "id": "item-hfz8gw",
               "name": "Content Generation",
-              "status": "plan",
+              "status": "live",
               "desc": "",
               "eta": "",
               "children": []
@@ -337,7 +337,7 @@
             {
               "id": "item-yvs1py",
               "name": "Competitive Intelligence",
-              "status": "plan",
+              "status": "live",
               "desc": "",
               "eta": "",
               "children": []
@@ -345,7 +345,7 @@
             {
               "id": "item-vcjxpo",
               "name": "Abstract to Arena app",
-              "status": "plan",
+              "status": "backlog",
               "desc": "",
               "eta": "",
               "children": []
