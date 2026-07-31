@@ -400,8 +400,8 @@
       "name": "Admin Hub",
       "tag": null,
       "purpose": "Platform operations — access, data management, forecast configuration, integrations.",
-      "stakeholders": "",
-      "audience": "",
+      "stakeholders": "All app admin users",
+      "audience": "All app admin users",
       "items": [
         {
           "id": "ad-users",
