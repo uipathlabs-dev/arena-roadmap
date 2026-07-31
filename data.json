@@ -125,7 +125,7 @@
           "id": "rev-opps",
           "name": "Opportunities",
           "status": "prog",
-          "desc": "Full pipeline list with deal-detail drilldown, notes, and risk.",
+          "desc": "A full-featured workspace for exploring and managing opportunities: a sortable, groupable data grid over all deals with dynamic column selection, advanced multi-condition filtering (AND/OR logic), hierarchical territory scoping, keyword search, and configurable summary totals on any amount field. Users can save and share views (columns, filters, sorts, grouping), group records with per-group rollups, inspect any deal in a detail panel and a direct Salesforce link, and export to CSV. Deep-linked from Forecast and Accounts, it serves as the drill-down destination across the app and supports write-back of select fields directly to Salesforce, making it not just an analysis grid but an editing surface for keeping CRM data current.",
           "children": [],
           "eta": "2026-09-14"
         },
