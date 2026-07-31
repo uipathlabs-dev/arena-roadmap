@@ -470,7 +470,7 @@
     state.sections.forEach(function (sec) {
       var det = document.createElement("details");
       det.className = "section-block";
-      det.open = true;
+      // Collapsed by default — click a section to expand it, same as items.
 
       var summary = document.createElement("summary");
       summary.addEventListener("click", function (e) {
