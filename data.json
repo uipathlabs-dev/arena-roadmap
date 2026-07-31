@@ -437,7 +437,7 @@
               "id": "item-oq4ls1",
               "name": "Abstract to Arena App",
               "status": "backlog",
-              "desc": "",
+              "desc": "Integrate the logic and agents so it covers the entire Arena data",
               "eta": "",
               "children": []
             }
