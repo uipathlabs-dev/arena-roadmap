@@ -267,6 +267,14 @@
               "desc": "A conversational Salesforce agent that allows users to query data and perform a limited set of approved updates using their own logged-in credentials.",
               "eta": "",
               "children": []
+            },
+            {
+              "id": "item-8p8awn",
+              "name": "Themes",
+              "status": "plan",
+              "desc": "A Themes module that analyzes customer interactions across emails and call recordings, identifies recurring topics, concerns, and opportunities, and groups them into actionable themes. Each theme is linked to the relevant accounts, opportunities, and territories, enabling leaders to understand customer sentiment, emerging trends, and common blockers across their organization.",
+              "eta": "2026-09-30",
+              "children": []
             }
           ],
           "eta": "2026-09-14"
