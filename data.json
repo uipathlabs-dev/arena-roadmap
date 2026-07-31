@@ -232,7 +232,7 @@
         {
           "id": "item-w75vhi",
           "name": "Abstract to Arena app",
-          "status": "plan",
+          "status": "backlog",
           "desc": "Integrate the logic and agents so it covers the entire Arena data",
           "children": []
         }
