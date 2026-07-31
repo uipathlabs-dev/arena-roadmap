@@ -450,8 +450,8 @@
       "name": "Backlog",
       "tag": null,
       "purpose": "Parked until the sections above land. Former Execution items now live here.",
-      "stakeholders": "All",
-      "audience": "All",
+      "stakeholders": "All app users",
+      "audience": "All app users",
       "items": [
         {
           "id": "bl-byn",
