@@ -415,6 +415,41 @@
           "children": []
         }
       ]
+    },
+    {
+      "id": "section-qranvv",
+      "name": "Content Hub",
+      "tag": null,
+      "purpose": "Home for all GTM content. Upload fiels, share, and understand what is behind it",
+      "stakeholders": "JR, Alex Statie",
+      "audience": "Testings with FINS, to be released to all GTM Teams",
+      "eta": "",
+      "items": [
+        {
+          "id": "item-z2wcoi",
+          "name": "Content Library",
+          "status": "plan",
+          "desc": "Upload and classify documents and links; gate what is uploaded so we have meanigful content",
+          "eta": "",
+          "children": []
+        },
+        {
+          "id": "item-582w7b",
+          "name": "Spaces",
+          "status": "plan",
+          "desc": "Curated hub pages built with easy to use visual editor; public or restricted.",
+          "eta": "",
+          "children": []
+        },
+        {
+          "id": "item-s89nfy",
+          "name": "AI Search",
+          "status": "plan",
+          "desc": "Keyword + semantic search across all content and spaces.",
+          "eta": "",
+          "children": []
+        }
+      ]
     }
   ]
 }
