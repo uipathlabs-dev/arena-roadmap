@@ -43,7 +43,7 @@
           "id": "rev-dashboard",
           "name": "Dashboard",
           "status": "prog",
-          "desc": "KPI overview and the daily starting point for revenue truth.",
+          "desc": "The executive revenue hub: a top-down view of quarterly performance combining KPIs, linearity, forward pipeline, and account penetration",
           "children": [
             {
               "id": "rev-day1",
@@ -57,7 +57,7 @@
               "id": "rev-arrgb",
               "name": "ARR Details",
               "status": "prog",
-              "desc": "ARR details and vertical penetration gameboard.",
+              "desc": "A sheet-style breakdown of Annual Recurring Revenue across territories and segments",
               "children": [],
               "eta": "2026-09-14"
             },
