@@ -23,8 +23,6 @@
   header.mast { padding: 40px 0 20px; border-bottom: 3px solid var(--ink); }
   .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
   h1 { font-size: clamp(30px, 5vw, 42px); font-weight: 700; letter-spacing: -.02em; margin: 0 0 12px; text-wrap: balance; }
-  .foundation { background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 12px 16px; font-size: 14px; max-width: 74ch; }
-  .foundation b { color: var(--accent); }
 
   .tag { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); border-radius: 2px; padding: 1px 7px; }
 
@@ -127,9 +125,12 @@
   .tree li:last-child::before { height: 24px; bottom: auto; }
 
   .node { background: var(--card); border: 1px solid var(--line); padding: 9px 14px; display: block; }
+  .node > summary.nh { list-style: none; cursor: pointer; }
+  .node > summary.nh::-webkit-details-marker { display: none; }
   .node .nh { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .node .nh-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
   .node.dirty { box-shadow: inset 3px 0 0 var(--accent); }
+  .node .item-body { padding-top: 6px; }
 
   dialog { border: 1px solid var(--ink); border-radius: 4px; padding: 22px; max-width: 460px; font-family: var(--sans); }
   dialog::backdrop { background: rgba(27,39,51,.45); }
@@ -149,7 +150,6 @@
   <header class="mast">
     <p class="eyebrow" id="subtitle"></p>
     <h1 id="title">Loading…</h1>
-    <div class="foundation" id="foundation" hidden></div>
   </header>
 
   <div class="admin-bar">
@@ -236,7 +236,7 @@
     return { id: newId("item"), name: "New item", status: "plan", desc: "", eta: "", children: [] };
   }
   function newSection() {
-    return { id: newId("section"), name: "New section", tag: null, purpose: "", stakeholders: "", audience: "", eta: "", items: [] };
+    return { id: newId("section"), name: "New section", tag: null, status: "plan", purpose: "", stakeholders: "", audience: "", eta: "", items: [] };
   }
   // <input type=date> gives "YYYY-MM-DD"; format it without going through
   // Date parsing (which is UTC-based and can shift the day near midnight
@@ -297,7 +297,7 @@
   // Single source of truth for "what fields does this kind of node have" —
   // used by both summarizeChanges() and refreshNodeBadge() so a future field
   // (like eta was) only needs adding here once.
-  var SECTION_FIELDS = ["name", "purpose", "stakeholders", "audience", "eta"];
+  var SECTION_FIELDS = ["name", "status", "purpose", "stakeholders", "audience", "eta"];
   var ITEM_FIELDS = ["name", "status", "desc", "eta"];
   function fieldsChanged(base, obj, fields) {
     return fields.some(function (f) { return base[f] !== obj[f]; });
@@ -364,12 +364,6 @@
   }
 
   // ---------- rendering ----------
-  function esc(s) {
-    return String(s).replace(/[&<>"]/g, function (ch) {
-      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch];
-    });
-  }
-
   // Shared by every up/down/add/delete/clear control — they're all a
   // `.btn-mini` with a label, optional title, optional danger styling, and a
   // click handler.
@@ -383,6 +377,29 @@
     btn.disabled = !!opts.disabled;
     btn.addEventListener("click", onClick);
     return btn;
+  }
+
+  // Shared by both section and item rows — a status <select>, disabled in
+  // read mode, wired to the same STATUSES/LABELS list either kind uses.
+  function renderStatusSelect(obj, kind, badgeTarget) {
+    var current = obj.status || "plan";
+    var sel = document.createElement("select");
+    sel.className = "status s-" + current;
+    sel.disabled = !editing;
+    STATUSES.forEach(function (s) {
+      var opt = document.createElement("option");
+      opt.value = s;
+      opt.textContent = LABELS[s];
+      if (s === current) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    sel.addEventListener("change", function () {
+      obj.status = sel.value;
+      sel.className = "status s-" + sel.value;
+      refreshNodeBadge(badgeTarget, obj, kind);
+      refreshDirtyUi();
+    });
+    return sel;
   }
 
   // Builds the ETA control for a section or item — returns null when there's
@@ -446,9 +463,6 @@
     document.title = state.meta.title + " — Roadmap";
     $("title").textContent = state.meta.title;
     $("subtitle").textContent = state.meta.subtitle || "";
-    var f = $("foundation");
-    f.hidden = !state.meta.foundation;
-    f.innerHTML = "<b>Foundation logic:</b> " + esc(state.meta.foundation);
 
     var app = $("app");
     app.innerHTML = "";
@@ -497,15 +511,16 @@
         summary.appendChild(tagEl);
       }
 
+      var secActions = document.createElement("span");
+      secActions.className = "nh-actions";
+      secActions.appendChild(renderStatusSelect(sec, "section", summary));
       if (editing) {
         var secIdx = state.sections.indexOf(sec);
-        var secActions = document.createElement("span");
-        secActions.className = "nh-actions";
         secActions.appendChild(makeMiniBtn("↑", "Move section up", function () { moveInArray(state.sections, sec, -1); }, { disabled: secIdx === 0 }));
         secActions.appendChild(makeMiniBtn("↓", "Move section down", function () { moveInArray(state.sections, sec, 1); }, { disabled: secIdx === state.sections.length - 1 }));
         secActions.appendChild(makeMiniBtn("delete section", null, function () { deleteSection(sec); }, { danger: true }));
-        summary.appendChild(secActions);
       }
+      summary.appendChild(secActions);
 
       // The section's description — editable right where it's shown, no
       // separate duplicate field.
@@ -605,11 +620,21 @@
 
   function renderItem(it, parentArray) {
     var li = document.createElement("li");
-    var node = document.createElement("span");
+    // Items collapse to just this summary line by default (compact); sections
+    // stay expanded. Native <details> gives the chevron/toggle for free and
+    // matches the section pattern, so it doubles as the badge/dirty target.
+    var node = document.createElement("details");
     node.className = "node";
 
-    var nh = document.createElement("span");
+    var nh = document.createElement("summary");
     nh.className = "nh";
+    nh.addEventListener("click", function (e) {
+      if (e.target.closest("input, textarea, select, button")) e.preventDefault();
+    });
+
+    var chev = document.createElement("span");
+    chev.className = "chev";
+    nh.appendChild(chev);
 
     var nameEl;
     if (editing) {
@@ -636,24 +661,7 @@
 
     var actions = document.createElement("span");
     actions.className = "nh-actions";
-
-    var sel = document.createElement("select");
-    sel.className = "status s-" + it.status;
-    sel.disabled = !editing;
-    STATUSES.forEach(function (s) {
-      var opt = document.createElement("option");
-      opt.value = s;
-      opt.textContent = LABELS[s];
-      if (s === it.status) opt.selected = true;
-      sel.appendChild(opt);
-    });
-    sel.addEventListener("change", function () {
-      it.status = sel.value;
-      sel.className = "status s-" + sel.value;
-      refreshNodeBadge(node, it, "item");
-      refreshDirtyUi();
-    });
-    actions.appendChild(sel);
+    actions.appendChild(renderStatusSelect(it, "item", node));
 
     if (editing) {
       var itIdx = parentArray.indexOf(it);
@@ -664,6 +672,10 @@
     }
     nh.appendChild(actions);
     node.appendChild(nh);
+
+    // Collapsed by default (compact); expands on click to reveal these.
+    var body = document.createElement("div");
+    body.className = "item-body";
 
     if (editing) {
       var descArea = document.createElement("textarea");
@@ -676,17 +688,19 @@
         refreshNodeBadge(node, it, "item");
         refreshDirtyUi();
       });
-      node.appendChild(descArea);
+      body.appendChild(descArea);
     } else if (it.desc) {
       var descLabel = document.createElement("span");
       descLabel.className = "purpose";
       descLabel.textContent = it.desc;
-      node.appendChild(descLabel);
+      body.appendChild(descLabel);
     }
 
     // ETA is hidden entirely when empty and not editing.
     var itEta = renderEta(it, "item", node, false);
-    if (itEta) node.appendChild(itEta);
+    if (itEta) body.appendChild(itEta);
+
+    if (body.children.length) node.appendChild(body);
 
     li.appendChild(node);
 
