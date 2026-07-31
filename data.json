@@ -16,112 +16,24 @@
       "id": "launchpad",
       "name": "Launchpad",
       "tag": null,
-      "purpose": "The entry section — where every user starts, experience personalized to their role.",
+      "purpose": "The personalized, role-aware home screen — a daily briefing on what needs attention now. KPI cards show Pipeline, Forecast call vs. target with attainment, and training progress; AI-driven panels surface at-risk deals, account plan health, coaching signals (for managers), and high-priority tasks.",
       "stakeholders": "JR, Alex Statie, Sabin & Leo",
-      "audience": "Testings with FINS, to be released to all GTM Teams",
+      "audience": "All logged-in users",
       "items": [
         {
-          "id": "lp-landing",
-          "name": "Landing page",
+          "id": "item-fpw5ic",
+          "name": "Landing Page",
           "status": "plan",
-          "desc": "Persona-based experience. Scope to be defined based on which products / feature flags are released.",
-          "children": [],
-          "eta": "2026-08-31"
-        },
-        {
-          "id": "lp-ae",
-          "name": "Next Best Action",
-          "status": "backlog",
-          "desc": "Levrage the data we have from Salesforce and other integrations to monitor, suggest actions for each role",
-          "children": [
-            {
-              "id": "item-veqto6",
-              "name": "AE Workspace",
-              "status": "backlog",
-              "desc": "Seller home — my deals, my territory, my tasks. ",
-              "children": []
-            },
-            {
-              "id": "item-jvqczy",
-              "name": "Manager Workspace",
-              "status": "backlog",
-              "desc": "Team rollups, rep performance, coaching. ",
-              "children": []
-            }
-          ]
-        },
-        {
-          "id": "lp-content-hub",
-          "name": "Content Hub",
-          "status": "live",
-          "desc": "Home for all GTM content. Upload fiels, share, and understand what is behind it",
-          "children": [
-            {
-              "id": "lp-library",
-              "name": "Content Library",
-              "status": "live",
-              "desc": "Upload and classify documents and links; gate what is uploaded so we have meanigful content",
-              "children": []
-            },
-            {
-              "id": "lp-spaces",
-              "name": "Spaces",
-              "status": "live",
-              "desc": "Curated hub pages built with easy to use visual editor; public or restricted.",
-              "children": []
-            },
-            {
-              "id": "lp-search",
-              "name": "AI Search",
-              "status": "live",
-              "desc": "Keyword + semantic search across all content and spaces.",
-              "children": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "intelligence",
-      "name": "Intelligence & Knowledge",
-      "tag": "abstract layer",
-      "purpose": "Content generator based on all data uploaded in Arena. First phase to focus on Content Hub, then implement and abstract solution to works on top the entire Arena app and data",
-      "stakeholders": "",
-      "audience": "",
-      "items": [
-        {
-          "id": "ik-kb",
-          "name": "Knowledge Base",
-          "status": "live",
-          "desc": "Curated records — pain points, proof points, quotes, win-wires — reviewed by humans.",
-          "children": []
-        },
-        {
-          "id": "ik-gen",
-          "name": "Content Generation",
-          "status": "live",
-          "desc": "Generate emails, battle cards, and narratives. Sync with what is already used in Arena for accounts.",
-          "children": []
-        },
-        {
-          "id": "ik-ci",
-          "name": "Competitive Intelligence",
-          "status": "live",
-          "desc": "Competitor profiles and battle cards with fact-check QA.",
-          "children": []
-        },
-        {
-          "id": "item-w75vhi",
-          "name": "Abstract to Arena app",
-          "status": "plan",
-          "desc": "Integrate the logic and agents so it covers the entire Arena data",
+          "desc": "",
+          "eta": "2026-09-30",
           "children": []
         }
-      ]
+      ],
+      "eta": "2026-09-30"
     },
     {
       "id": "revenue",
-      "name": "Revenue",
+      "name": "Revenue Hub",
       "tag": null,
       "purpose": "The numbers side — forecast, pipeline, and account truth for the whole org",
       "stakeholders": "",
@@ -226,6 +138,87 @@
       ]
     },
     {
+      "id": "section-qranvv",
+      "name": "Content Hub",
+      "tag": null,
+      "purpose": "Home for all GTM content. Upload fiels, share, and understand what is behind it",
+      "stakeholders": "JR, Alex Statie",
+      "audience": "Testings with FINS, to be released to all GTM Teams",
+      "eta": "",
+      "items": [
+        {
+          "id": "item-z2wcoi",
+          "name": "Content Library",
+          "status": "live",
+          "desc": "Upload and classify documents and links; gate what is uploaded so we have meanigful content",
+          "eta": "",
+          "children": []
+        },
+        {
+          "id": "item-582w7b",
+          "name": "Spaces",
+          "status": "live",
+          "desc": "Curated hub pages built with easy to use visual editor; public or restricted.",
+          "eta": "",
+          "children": []
+        },
+        {
+          "id": "item-s89nfy",
+          "name": "AI Search",
+          "status": "live",
+          "desc": "Keyword + semantic search across all content and spaces.",
+          "eta": "",
+          "children": []
+        },
+        {
+          "id": "item-1t460l",
+          "name": "Use Case Explorer",
+          "status": "backlog",
+          "desc": "Migrate the Use Case data coming from the field and map it to the existing content we have in Content Hub",
+          "eta": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "intelligence",
+      "name": "Intelligence & Knowledge",
+      "tag": "abstract layer",
+      "purpose": "Content generator based on all data uploaded in Arena. First phase to focus on Content Hub, then implement and abstract solution to works on top the entire Arena app and data",
+      "stakeholders": "",
+      "audience": "",
+      "items": [
+        {
+          "id": "ik-kb",
+          "name": "Knowledge Base",
+          "status": "live",
+          "desc": "Curated records — pain points, proof points, quotes, win-wires — reviewed by humans.",
+          "children": []
+        },
+        {
+          "id": "ik-gen",
+          "name": "Content Generation",
+          "status": "live",
+          "desc": "Generate emails, battle cards, and narratives. Sync with what is already used in Arena for accounts.",
+          "children": []
+        },
+        {
+          "id": "ik-ci",
+          "name": "Competitive Intelligence",
+          "status": "live",
+          "desc": "Competitor profiles and battle cards with fact-check QA.",
+          "children": []
+        },
+        {
+          "id": "item-w75vhi",
+          "name": "Abstract to Arena app",
+          "status": "plan",
+          "desc": "Integrate the logic and agents so it covers the entire Arena data",
+          "children": []
+        }
+      ]
+    },
+    {
       "id": "ai-agent",
       "name": "AI & Agent Layer",
       "tag": null,
@@ -255,49 +248,56 @@
           "name": "Users & Roles",
           "status": "prog",
           "desc": "Role model and module permissions on top of the reused SSO.",
-          "children": []
+          "children": [],
+          "eta": "2026-09-14"
         },
         {
           "id": "ad-permissions",
           "name": "Permissions",
           "status": "prog",
           "desc": "Access based on predefined teams; territory assignment.",
-          "children": []
+          "children": [],
+          "eta": "2026-09-14"
         },
         {
           "id": "ad-upload",
           "name": "Data Upload",
           "status": "prog",
           "desc": "Quota upload with Excel import.",
-          "children": []
+          "children": [],
+          "eta": "2026-09-14"
         },
         {
           "id": "ad-snapshots",
           "name": "Snapshots",
           "status": "prog",
           "desc": "Check or generate bridge data on demand.",
-          "children": []
+          "children": [],
+          "eta": "2026-09-14"
         },
         {
           "id": "ad-forecast-settings",
           "name": "Forecast Settings",
           "status": "prog",
           "desc": "Set thresholds for regions and account buckets.",
-          "children": []
+          "children": [],
+          "eta": "2026-09-14"
         },
         {
           "id": "ad-general",
           "name": "General",
           "status": "prog",
           "desc": "Generic variable data used across the app.",
-          "children": []
+          "children": [],
+          "eta": "2026-09-14"
         },
         {
           "id": "ad-integrations",
           "name": "Integrations Settings",
           "status": "prog",
           "desc": "Status per integration and last synced data.",
-          "children": []
+          "children": [],
+          "eta": "2026-09-14"
         },
         {
           "id": "ad-governance",
@@ -341,7 +341,8 @@
           "desc": "Create and montior the Spaces created in Content Hub for each team",
           "children": []
         }
-      ]
+      ],
+      "eta": "2026-09-14"
     },
     {
       "id": "backlog",
@@ -355,21 +356,14 @@
           "id": "bl-byn",
           "name": "Build Your Number",
           "status": "backlog",
-          "desc": "Bottom-up forecast builder for manager review.",
+          "desc": "A fiscal-year revenue planning workspace for constructing and pressure-testing your annual Net ARR number from the bottom up.",
           "children": []
         },
         {
           "id": "bl-actions",
           "name": "My Actions & Alerts",
           "status": "backlog",
-          "desc": "Task center plus threshold-based deal alerts.",
-          "children": []
-        },
-        {
-          "id": "bl-gameboard",
-          "name": "Gameboard & Challenges",
-          "status": "backlog",
-          "desc": "Vertical penetration views, leaderboards, and contests.",
+          "desc": "A unified work-list combining every task a user owes — commitments captured in account plans alongside system-generated, trigger-driven tasks fired by changes on opportunities and accounts (e.g., risk signals, stale data, or required follow-ups). Each item carries its source, due date, and status, so open and overdue work is tracked in one place instead of scattered across plans and records. It's the action layer of the app: insights and plans become concrete to-dos.",
           "children": []
         },
         {
@@ -377,13 +371,6 @@
           "name": "SWAT",
           "status": "backlog",
           "desc": "Deal-rescue task forces — workstreams, risks, tasks, AI digests.",
-          "children": []
-        },
-        {
-          "id": "bl-cases",
-          "name": "Case Ingestion",
-          "status": "backlog",
-          "desc": "Support-case data folded into account views.",
           "children": []
         },
         {
@@ -411,42 +398,7 @@
           "id": "item-op28rc",
           "name": "Use Case Explorer",
           "status": "backlog",
-          "desc": "Migrate the Use Case data coming from the field and map it to the exisitng content we have in Launchpad",
-          "children": []
-        }
-      ]
-    },
-    {
-      "id": "section-qranvv",
-      "name": "Content Hub",
-      "tag": null,
-      "purpose": "Home for all GTM content. Upload fiels, share, and understand what is behind it",
-      "stakeholders": "JR, Alex Statie",
-      "audience": "Testings with FINS, to be released to all GTM Teams",
-      "eta": "",
-      "items": [
-        {
-          "id": "item-z2wcoi",
-          "name": "Content Library",
-          "status": "plan",
-          "desc": "Upload and classify documents and links; gate what is uploaded so we have meanigful content",
-          "eta": "",
-          "children": []
-        },
-        {
-          "id": "item-582w7b",
-          "name": "Spaces",
-          "status": "plan",
-          "desc": "Curated hub pages built with easy to use visual editor; public or restricted.",
-          "eta": "",
-          "children": []
-        },
-        {
-          "id": "item-s89nfy",
-          "name": "AI Search",
-          "status": "plan",
-          "desc": "Keyword + semantic search across all content and spaces.",
-          "eta": "",
+          "desc": "Migrate the Use Case data coming from the field and map it to the existing content we have in Content Hub",
           "children": []
         }
       ]
