@@ -378,7 +378,7 @@
               "id": "item-b6ytym",
               "name": "EDW Marketing",
               "status": "backlog",
-              "desc": "",
+              "desc": "Set up an EDW Marketing integration from Arena to the Microsoft Fabric Marketing_Model so Account Activity can consume account, engagement, 6sense intent/MQA, campaign, customer-status, and opportunity data using Marketing Analytics’ defined metrics and logic. The integration should support an agreed refresh cadence and account-level filtering, with the implementation using either live semantic-model access (DirectQuery/XMLA) or a materialized extract based on performance needs.",
               "eta": "",
               "children": []
             }
