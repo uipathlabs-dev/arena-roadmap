@@ -369,10 +369,43 @@
             {
               "id": "item-jwvaba",
               "name": "Slack",
-              "status": "plan",
+              "status": "prog",
               "desc": "We sync account-linked Slack channels and their recent messages, matching channels to Salesforce accounts, and surface that discussion in account views. The integration also works outbound: users can send Slack messages directly from the app, and the app delivers notifications (alerts, task reminders, updates) straight to users in Slack.",
-              "eta": "2026-09-30",
-              "children": []
+              "eta": "2026-09-14",
+              "children": [
+                {
+                  "id": "item-r4j9c4",
+                  "name": "DM from App",
+                  "status": "prog",
+                  "desc": "",
+                  "eta": "2026-09-14",
+                  "children": []
+                },
+                {
+                  "id": "item-xf98ry",
+                  "name": "Read Account Channels",
+                  "status": "plan",
+                  "desc": "",
+                  "eta": "2026-09-30",
+                  "children": []
+                },
+                {
+                  "id": "item-l3us9v",
+                  "name": "Conversational Agent",
+                  "status": "backlog",
+                  "desc": "",
+                  "eta": "",
+                  "children": []
+                },
+                {
+                  "id": "item-dasi7u",
+                  "name": "App Notifications & Alerts",
+                  "status": "backlog",
+                  "desc": "",
+                  "eta": "",
+                  "children": []
+                }
+              ]
             },
             {
               "id": "item-b6ytym",
