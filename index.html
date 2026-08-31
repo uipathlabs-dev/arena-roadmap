@@ -737,9 +737,22 @@
     // Read through the API (not the Pages copy) so we always see the latest
     // commit immediately and get the sha needed for writes.
     var headers = { Accept: "application/vnd.github+json" };
-    if (token()) headers.Authorization = "Bearer " + token();
+    var authed = !!token();
+    if (authed) headers.Authorization = "Bearer " + token();
     return fetch(API + "?ref=" + BRANCH + "&t=" + Date.now(), { headers: headers })
       .then(function (r) {
+        if (!r.ok && authed && (r.status === 401 || r.status === 403)) {
+          // The stored token is expired/revoked. The repo is public, so drop
+          // the token and read anonymously instead of blocking the page.
+          if (r.status === 401) { try { localStorage.removeItem(TOKEN_KEY); } catch (e) {} }
+          if (editing) setEditing(false);
+          setStatusMsg("Your saved GitHub token expired — now in read-only view. Click Enable editing to paste a new one.", true);
+          return fetch(API + "?ref=" + BRANCH + "&t=" + Date.now(), { headers: { Accept: "application/vnd.github+json" } })
+            .then(function (r2) {
+              if (!r2.ok) throw new Error("Could not load data.json (HTTP " + r2.status + ")");
+              return r2.json();
+            });
+        }
         if (!r.ok) throw new Error("Could not load data.json (HTTP " + r.status + ")");
         return r.json();
       })
@@ -765,8 +778,12 @@
     };
     var CANCELLED = { cancelled: true };
 
+    var TOKEN_REJECTED = new Error("Your GitHub token was rejected (expired or missing permissions) — paste a new one to save. Your edits are still here.");
+    TOKEN_REJECTED.tokenRejected = true;
+
     fetch(API + "?ref=" + BRANCH + "&t=" + Date.now(), { headers: headers })
       .then(function (r) {
+        if (r.status === 401 || r.status === 403) throw TOKEN_REJECTED;
         if (!r.ok) throw new Error("Pre-save read failed (HTTP " + r.status + ")");
         return r.json();
       })
@@ -792,7 +809,7 @@
       })
       .then(function (r) {
         if (r.status === 409) throw new Error("Edit conflict — hit Save again.");
-        if (r.status === 401 || r.status === 403) throw new Error("Token rejected — check its permissions.");
+        if (r.status === 401 || r.status === 403) throw TOKEN_REJECTED;
         if (!r.ok) throw new Error("Save failed (HTTP " + r.status + ")");
         return r.json();
       })
@@ -807,6 +824,7 @@
         if (e === CANCELLED) setStatusMsg("Save cancelled — click Reload to see the latest.", true);
         else setStatusMsg((e && e.message) || "Save failed", true);
         refreshDirtyUi();
+        if (e && e.tokenRejected) openTokenDialog();
       });
   }
 
