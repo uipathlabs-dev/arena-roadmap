@@ -265,7 +265,7 @@
               "name": "Support Cases Analysis",
               "status": "live",
               "desc": "Analyzes customer support cases to identify recurring issues, trends, sentiment, and escalation risks, then consolidates the findings at account and territory levels to provide visibility into customer health and emerging support patterns.",
-              "eta": "2026-09-30",
+              "eta": "",
               "children": []
             },
             {
@@ -273,7 +273,7 @@
               "name": "Executive Briefing Generator",
               "status": "live",
               "desc": "Generates an executive briefing that summarizes performance against quota, current forecast position, pipeline composition, key deal movements, and emerging risks. It highlights the most important gaps, dependencies, and areas requiring leadership attention across the relevant territory or organization.",
-              "eta": "2026-09-30",
+              "eta": "",
               "children": []
             },
             {
@@ -281,7 +281,7 @@
               "name": "Opportunity Insights",
               "status": "live",
               "desc": "Generates opportunity-level insights and scoring by analyzing Salesforce fields, historical deal patterns, and recent activity to estimate the likelihood of each deal closing and closing on time. It highlights the signals driving each score, identifies potential risks or gaps, and surfaces the opportunities that require attention.",
-              "eta": "2026-09-14",
+              "eta": "",
               "children": []
             },
             {
@@ -293,21 +293,21 @@
               "children": []
             }
           ],
-          "eta": "2026-09-14"
+          "eta": ""
         },
         {
           "id": "item-h5eaeg",
           "name": "Integrations",
           "status": "live",
           "desc": "A section to provide a centralized view of all platform integrations, outlining which systems are connected, how each integration is used, the data exchanged, and the capabilities it enables.",
-          "eta": "2026-09-14",
+          "eta": "",
           "children": [
             {
               "id": "item-4g6b1l",
               "name": "Salesforce",
               "status": "live",
               "desc": "Our CRM backbone, with two connections: a dedicated ingestion pipeline that continuously pulls opportunities, accounts, contracts, support cases, users, and the full sales territory hierarchy; and per-user OAuth for secure write-back, so select field updates made in the app are written to Salesforce under the user's own identity and permissions. The ingested data drives virtually everything: the Forecast module (Overview, Build, Bridge), the Opportunities workspace, account views, and territory-based filtering and access control throughout the app.",
-              "eta": "2026-09-14",
+              "eta": "",
               "children": []
             },
             {
@@ -315,7 +315,7 @@
               "name": "EDW",
               "status": "live",
               "desc": "Our enterprise data warehouse feed. We pull finance-grade data that goes beyond CRM: ARR history, ultimate-parent account rollups, and curated account/opportunity records. This is what powers ARR figures on the Dashboard and Ruby Accounts, customer-360 views in Account Hub, and any analysis that needs official revenue numbers rather than pipeline estimates.",
-              "eta": "2026-09-14",
+              "eta": "",
               "children": []
             },
             {
@@ -323,7 +323,7 @@
               "name": "Snowflake",
               "status": "live",
               "desc": "We pull utilization telemetry (users, robots, consumables, deployment types) and agentic/AI adoption signals (agent runs, Maestro runs, trends) from Snowflake. This data is surfaced in the Utilization and Agentic Signal columns on Ruby Accounts and in Account Hub's product utilization views, showing how deeply each customer is actually using the platform.",
-              "eta": "2026-09-14",
+              "eta": "",
               "children": []
             },
             {
@@ -347,7 +347,7 @@
               "name": "Clari CoPilot",
               "status": "live",
               "desc": "We pull recorded customer calls (Zoom/Teams/Meet) with participants, transcripts, and topics, and generate AI-written structured summaries of each call. Surfaced as call history and summaries on accounts and opportunities, giving teams searchable context on every customer conversation.",
-              "eta": "2026-09-30",
+              "eta": "",
               "children": []
             },
             {
@@ -363,7 +363,7 @@
               "name": "FDE App",
               "status": "live",
               "desc": "We pull engagement scores, project milestones and blockers, and engineer utilization from the FDE Sentinel system. Surfaced in the FDE columns on Ruby Accounts and engagement-health views, showing where field engineers are deployed and how those engagements are progressing.",
-              "eta": "2026-09-14",
+              "eta": "",
               "children": []
             },
             {
@@ -371,14 +371,14 @@
               "name": "Slack",
               "status": "live",
               "desc": "We sync account-linked Slack channels and their recent messages, matching channels to Salesforce accounts, and surface that discussion in account views. The integration also works outbound: users can send Slack messages directly from the app, and the app delivers notifications (alerts, task reminders, updates) straight to users in Slack.",
-              "eta": "2026-09-14",
+              "eta": "",
               "children": [
                 {
                   "id": "item-r4j9c4",
                   "name": "DM from App",
                   "status": "live",
                   "desc": "",
-                  "eta": "2026-09-14",
+                  "eta": "",
                   "children": []
                 },
                 {
@@ -476,7 +476,7 @@
           "status": "live",
           "desc": "Role model and module permissions on top of the reused SSO.",
           "children": [],
-          "eta": "2026-09-14"
+          "eta": ""
         },
         {
           "id": "ad-permissions",
@@ -484,7 +484,7 @@
           "status": "live",
           "desc": "Access based on predefined teams; territory assignment.",
           "children": [],
-          "eta": "2026-09-14"
+          "eta": ""
         },
         {
           "id": "ad-upload",
@@ -492,7 +492,7 @@
           "status": "live",
           "desc": "Quota upload with Excel import.",
           "children": [],
-          "eta": "2026-09-14"
+          "eta": ""
         },
         {
           "id": "ad-snapshots",
@@ -500,7 +500,7 @@
           "status": "live",
           "desc": "Check or generate bridge data on demand.",
           "children": [],
-          "eta": "2026-09-14"
+          "eta": ""
         },
         {
           "id": "ad-forecast-settings",
@@ -508,7 +508,7 @@
           "status": "live",
           "desc": "Set thresholds for regions and account buckets.",
           "children": [],
-          "eta": "2026-09-14"
+          "eta": ""
         },
         {
           "id": "ad-general",
@@ -516,7 +516,7 @@
           "status": "live",
           "desc": "Generic variable data used across the app.",
           "children": [],
-          "eta": "2026-09-14"
+          "eta": ""
         },
         {
           "id": "ad-integrations",
@@ -524,7 +524,7 @@
           "status": "live",
           "desc": "Status per integration and last synced data.",
           "children": [],
-          "eta": "2026-09-14"
+          "eta": ""
         },
         {
           "id": "ad-governance",
@@ -569,7 +569,7 @@
           "children": []
         }
       ],
-      "eta": "2026-09-14",
+      "eta": "",
       "status": "live"
     },
     {
