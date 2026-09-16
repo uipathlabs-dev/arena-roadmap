@@ -29,7 +29,7 @@
           "children": []
         }
       ],
-      "eta": "2026-09-30"
+      "eta": "2026-10-19"
     },
     {
       "id": "revenue",
@@ -42,13 +42,13 @@
         {
           "id": "rev-dashboard",
           "name": "Dashboard",
-          "status": "prog",
+          "status": "live",
           "desc": "The executive revenue hub: a top-down view of quarterly performance combining KPIs, linearity, forward pipeline, and account penetration",
           "children": [
             {
               "id": "rev-day1",
               "name": "Day 1",
-              "status": "prog",
+              "status": "live",
               "desc": "A single-page executive readout of the quarter combining forecast KPIs, top deals and churn, rotating analytical views (forecast breakdown, area and vertical performance, linearity, Ruby risk).",
               "children": [],
               "eta": "2026-09-14"
@@ -56,17 +56,17 @@
             {
               "id": "rev-arrgb",
               "name": "ARR Details",
-              "status": "prog",
+              "status": "backlog",
               "desc": "A sheet-style breakdown of Annual Recurring Revenue across territories and segments.",
               "children": [],
-              "eta": "2026-09-14"
+              "eta": ""
             },
             {
               "id": "item-9teglo",
               "name": "Gameboard",
-              "status": "prog",
+              "status": "backlog",
               "desc": "Account health and whitespace analysis in three sub-views: product Penetration depth within accounts, a strategic account Matrix, and Pen-Traction combining penetration with recent velocity.",
-              "eta": "2026-09-14",
+              "eta": "",
               "children": []
             },
             {
@@ -83,13 +83,13 @@
         {
           "id": "rev-forecast",
           "name": "Forecast",
-          "status": "prog",
+          "status": "live",
           "desc": "The sales forecasting hub for the current quarter and beyond: it combines live CRM pipeline with historical patterns and point-in-time snapshots so leaders can call a number, build it bottom-up, judge its risk against history, and explain how it changed week over week.",
           "children": [
             {
               "id": "rev-f-overview",
               "name": "Overview",
-              "status": "prog",
+              "status": "live",
               "desc": "The core forecast rollup: a hierarchical territory tree showing pipeline and the calculated \"Math Forecast,\" toggle-able between iARR and Subscription TCV and between Sales and Finance views, with drill-in by territory and a workspace panel for cell-level deal inspection and manual forecast adjustments.",
               "children": [
                 {
@@ -106,7 +106,7 @@
             {
               "id": "rev-f-build",
               "name": "Build",
-              "status": "prog",
+              "status": "live",
               "desc": "A guided, bottom-up forecast constructor that buckets the quarter into Large Deals, Flow, Large/Small DSC, and Flat Renewals and shows account-level deal tables per bucket — with segment charts, per-deal vs. per-account toggle - with per deal/category adjustments input at AVP and SVP level.",
               "children": [],
               "eta": "2026-09-14"
@@ -114,7 +114,7 @@
             {
               "id": "rev-f-linearity",
               "name": "Linearity",
-              "status": "prog",
+              "status": "live",
               "desc": "Historical quarter-progression curves (1/2/3-year averages) overlaid on the current quarter, with a linearity estimates matrix, run-rate and risk calculations, threshold-based deal assessments, a hierarchical territory filter, and Quarter / Semi-Annual / Annual scopes — answering \"given where we are on day N, are we on pace?\"",
               "children": [],
               "eta": "2026-09-14"
@@ -122,7 +122,7 @@
             {
               "id": "rev-f-bridge",
               "name": "Bridge",
-              "status": "prog",
+              "status": "live",
               "desc": "Snapshot-to-snapshot or snapshot to live comparison explaining forecast or pipeline movement: waterfall charts of net change decomposed into categories deals between any two snapshot dates, clickable down to the specific deals behind each bar, in either bucket-based or deal-movement views.",
               "children": [],
               "eta": "2026-09-14"
@@ -133,7 +133,7 @@
         {
           "id": "rev-opps",
           "name": "Opportunities",
-          "status": "prog",
+          "status": "live",
           "desc": "A full-featured workspace for exploring and managing opportunities: a sortable, groupable data grid over all deals with dynamic column selection, advanced multi-condition filtering (AND/OR logic), hierarchical territory scoping, keyword search, and configurable summary totals on any amount field. Users can save and share views (columns, filters, sorts, grouping), group records with per-group rollups, inspect any deal in a detail panel and a direct Salesforce link, and export to CSV. Deep-linked from Forecast and Accounts, it serves as the drill-down destination across the app and supports write-back of select fields directly to Salesforce, making it not just an analysis grid but an editing surface for keeping CRM data current.",
           "children": [],
           "eta": "2026-09-14"
@@ -141,13 +141,13 @@
         {
           "id": "rev-accounts",
           "name": "Accounts",
-          "status": "prog",
+          "status": "live",
           "desc": "Account truth: list plus per-account deep dive.",
           "children": [
             {
               "id": "rev-acc-overview",
               "name": "Accounts Overview",
-              "status": "prog",
+              "status": "live",
               "desc": "A high-density account command center that classifies the customer base by pipeline health or account tier, with interactive summary cards showing count, ARR, and current/next-quarter pipeline for each segment. The main table brings everything known about an account into one row across collapsible column groups: ARR/ACV and renewal dates, territory and vertical, the full coverage team (AE, CSM, TAM, SE, partner) with activity levels, services delivery status, product-level ARR breakouts, utilization telemetry (users, robots, consumables), agentic/AI adoption signals, support cases, and forward pipeline — switchable between parent-account (strategic) and child-account (operational) grain. Dedicated tabs extend the view to CS/TAM Coverage, Services, Partners, and Global Accounts. Users can scope by a hierarchical territory filter, drill from any pipeline or ARR figure into the underlying deals, flag key accounts for Big Deal / Day 2 reviews. Accounts can be drilled-down into for the Account Hub view.",
               "children": [],
               "eta": "2026-09-14"
@@ -158,14 +158,14 @@
               "status": "plan",
               "desc": "The 360-degree single-account workspace: pick any customer and get everything the account team (AE, CSM, TAM, SE, PS/FDE) needs in one place. A persistent header shows ARR, geography, at-risk status, key-account tags, the assigned team, and a renewal countdown with the ARR at stake; tabs then organize the depth — Account Summary (health and key metrics at a glance), Account Data (open pipeline, TCV, product utilization, recent activity, support cases), Account Plan (strategy, interactive org charts, success plans, risk management), Consumption Plan (usage versus targets), Know Your Customer (firmographic and strategic research), and Self-Service reporting.",
               "children": [],
-              "eta": "2026-09-30"
+              "eta": "2026-10-19"
             }
           ],
           "eta": "2026-09-14"
         }
       ],
-      "eta": "2026-09-14",
-      "status": "prog"
+      "eta": "",
+      "status": "live"
     },
     {
       "id": "section-qranvv",
