@@ -51,7 +51,7 @@
               "status": "live",
               "desc": "A single-page executive readout of the quarter combining forecast KPIs, top deals and churn, rotating analytical views (forecast breakdown, area and vertical performance, linearity, Ruby risk).",
               "children": [],
-              "eta": "2026-09-14"
+              "eta": ""
             },
             {
               "id": "rev-arrgb",
@@ -78,7 +78,7 @@
               "children": []
             }
           ],
-          "eta": "2026-09-14"
+          "eta": ""
         },
         {
           "id": "rev-forecast",
@@ -101,7 +101,7 @@
                   "children": []
                 }
               ],
-              "eta": "2026-09-14"
+              "eta": ""
             },
             {
               "id": "rev-f-build",
@@ -109,7 +109,7 @@
               "status": "live",
               "desc": "A guided, bottom-up forecast constructor that buckets the quarter into Large Deals, Flow, Large/Small DSC, and Flat Renewals and shows account-level deal tables per bucket — with segment charts, per-deal vs. per-account toggle - with per deal/category adjustments input at AVP and SVP level.",
               "children": [],
-              "eta": "2026-09-14"
+              "eta": ""
             },
             {
               "id": "rev-f-linearity",
@@ -117,7 +117,7 @@
               "status": "live",
               "desc": "Historical quarter-progression curves (1/2/3-year averages) overlaid on the current quarter, with a linearity estimates matrix, run-rate and risk calculations, threshold-based deal assessments, a hierarchical territory filter, and Quarter / Semi-Annual / Annual scopes — answering \"given where we are on day N, are we on pace?\"",
               "children": [],
-              "eta": "2026-09-14"
+              "eta": ""
             },
             {
               "id": "rev-f-bridge",
@@ -125,10 +125,10 @@
               "status": "live",
               "desc": "Snapshot-to-snapshot or snapshot to live comparison explaining forecast or pipeline movement: waterfall charts of net change decomposed into categories deals between any two snapshot dates, clickable down to the specific deals behind each bar, in either bucket-based or deal-movement views.",
               "children": [],
-              "eta": "2026-09-14"
+              "eta": ""
             }
           ],
-          "eta": "2026-09-14"
+          "eta": ""
         },
         {
           "id": "rev-opps",
@@ -136,7 +136,7 @@
           "status": "live",
           "desc": "A full-featured workspace for exploring and managing opportunities: a sortable, groupable data grid over all deals with dynamic column selection, advanced multi-condition filtering (AND/OR logic), hierarchical territory scoping, keyword search, and configurable summary totals on any amount field. Users can save and share views (columns, filters, sorts, grouping), group records with per-group rollups, inspect any deal in a detail panel and a direct Salesforce link, and export to CSV. Deep-linked from Forecast and Accounts, it serves as the drill-down destination across the app and supports write-back of select fields directly to Salesforce, making it not just an analysis grid but an editing surface for keeping CRM data current.",
           "children": [],
-          "eta": "2026-09-14"
+          "eta": ""
         },
         {
           "id": "rev-accounts",
@@ -150,7 +150,7 @@
               "status": "live",
               "desc": "A high-density account command center that classifies the customer base by pipeline health or account tier, with interactive summary cards showing count, ARR, and current/next-quarter pipeline for each segment. The main table brings everything known about an account into one row across collapsible column groups: ARR/ACV and renewal dates, territory and vertical, the full coverage team (AE, CSM, TAM, SE, partner) with activity levels, services delivery status, product-level ARR breakouts, utilization telemetry (users, robots, consumables), agentic/AI adoption signals, support cases, and forward pipeline — switchable between parent-account (strategic) and child-account (operational) grain. Dedicated tabs extend the view to CS/TAM Coverage, Services, Partners, and Global Accounts. Users can scope by a hierarchical territory filter, drill from any pipeline or ARR figure into the underlying deals, flag key accounts for Big Deal / Day 2 reviews. Accounts can be drilled-down into for the Account Hub view.",
               "children": [],
-              "eta": "2026-09-14"
+              "eta": ""
             },
             {
               "id": "rev-acc-hub",
@@ -161,7 +161,7 @@
               "eta": "2026-10-19"
             }
           ],
-          "eta": "2026-09-14"
+          "eta": ""
         }
       ],
       "eta": "",
@@ -459,8 +459,8 @@
           ]
         }
       ],
-      "eta": "2026-09-14",
-      "status": "prog"
+      "eta": "",
+      "status": "live"
     },
     {
       "id": "admin",
