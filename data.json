@@ -23,13 +23,14 @@
         {
           "id": "item-fpw5ic",
           "name": "Landing Page",
-          "status": "plan",
+          "status": "prog",
           "desc": "",
           "eta": "2026-10-19",
           "children": []
         }
       ],
-      "eta": "2026-10-19"
+      "eta": "2026-10-19",
+      "status": "prog"
     },
     {
       "id": "revenue",
