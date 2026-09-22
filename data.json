@@ -255,9 +255,9 @@
             {
               "id": "item-8p8awn",
               "name": "Themes",
-              "status": "plan",
+              "status": "prog",
               "desc": "A Themes module that analyzes customer interactions across emails and call recordings, identifies recurring topics, concerns, and opportunities, and groups them into actionable themes. Each theme is linked to the relevant accounts, opportunities, and territories, enabling leaders to understand customer sentiment, emerging trends, and common blockers across their organization.",
-              "eta": "2026-09-30",
+              "eta": "2026-10-19",
               "children": []
             },
             {
@@ -287,9 +287,9 @@
             {
               "id": "item-6qw97a",
               "name": "Account Insights",
-              "status": "plan",
+              "status": "prog",
               "desc": "Generates account-level insights across Account Plan, Know Your Customer, Consumption Plan, and Account Data by combining information captured within the platform, Salesforce records, and recent customer activity from emails, meetings, and call recordings. It summarizes account health, engagement, product adoption, pipeline, risks, and stakeholder coverage, then recommends the next best action for each role on the account team.",
-              "eta": "2026-09-30",
+              "eta": "2026-10-19",
               "children": []
             },
             {
@@ -345,7 +345,7 @@
             {
               "id": "item-i79wvf",
               "name": "Exchange",
-              "status": "plan",
+              "status": "prog",
               "desc": "Email and calendar intelligence. We pull message and meeting activity from mapped mailboxes to build account activity and opportunity timelines (who's been meeting and emailing whom).",
               "eta": "2026-10-19",
               "children": []
