@@ -291,6 +291,22 @@
               "desc": "Generates account-level insights across Account Plan, Know Your Customer, Consumption Plan, and Account Data by combining information captured within the platform, Salesforce records, and recent customer activity from emails, meetings, and call recordings. It summarizes account health, engagement, product adoption, pipeline, risks, and stakeholder coverage, then recommends the next best action for each role on the account team.",
               "eta": "2026-09-30",
               "children": []
+            },
+            {
+              "id": "item-i6tcmn",
+              "name": "Read-Only MCP",
+              "status": "backlog",
+              "desc": "",
+              "eta": "",
+              "children": []
+            },
+            {
+              "id": "item-jjno9l",
+              "name": "Write MCP",
+              "status": "backlog",
+              "desc": "",
+              "eta": "",
+              "children": []
             }
           ],
           "eta": ""
