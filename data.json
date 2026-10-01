@@ -240,9 +240,9 @@
             {
               "id": "item-54dvyw",
               "name": "Conversational Agent on SF Data",
-              "status": "prog",
+              "status": "backlog",
               "desc": "A conversational Salesforce agent that allows users to query data and perform a limited set of approved updates using their own logged-in credentials.",
-              "eta": "2026-10-19",
+              "eta": "",
               "children": []
             },
             {
@@ -290,7 +290,7 @@
               "name": "Account Insights",
               "status": "prog",
               "desc": "Generates account-level insights across Account Plan, Know Your Customer, Consumption Plan, and Account Data by combining information captured within the platform, Salesforce records, and recent customer activity from emails, meetings, and call recordings. It summarizes account health, engagement, product adoption, pipeline, risks, and stakeholder coverage, then recommends the next best action for each role on the account team.",
-              "eta": "2026-10-19",
+              "eta": "2026-12-15",
               "children": []
             },
             {
